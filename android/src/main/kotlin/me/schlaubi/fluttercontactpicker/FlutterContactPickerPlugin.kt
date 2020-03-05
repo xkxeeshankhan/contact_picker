@@ -81,7 +81,6 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
     }
 
     fun setupActivity(binding: ActivityBinding) {
-        println("ACTIVITY")
         activityBinding = binding
     }
 
@@ -91,7 +90,6 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
 
 
     override fun onDetachedFromActivity() {
-        print("Activity deattach")
         activityBinding = null
     }
 
