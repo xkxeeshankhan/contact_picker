@@ -1,3 +1,5 @@
+## 2.1.1
+- Remove debug messages
 ## 2.1.0
 - Migrate to Flutter v2 embedded plugins
 - Remove example plugin code
