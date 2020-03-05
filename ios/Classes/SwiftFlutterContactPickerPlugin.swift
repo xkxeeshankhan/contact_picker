@@ -3,7 +3,9 @@ import UIKit
 import ContactsUI
 
 @available(iOS 9.0, *)
-public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin, CNContactPickerDelegate {
+public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin {
+    
+    private var pickerDelegate: CNContactPickerDelegate?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "fluttercontactpicker", binaryMessenger: registrar.messenger())
@@ -13,7 +15,7 @@ public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin, CNContact
     
     private func requestPicker(result: @escaping FlutterResult, type: String, neededProperty: String) {
         let controller = CNContactPickerViewController()
-        let pickerDelegate = ContactPickerDelegate(result: result, type: type)
+        pickerDelegate = ContactPickerDelegate(result: result, type: type)
         controller.delegate = pickerDelegate
         controller.displayedPropertyKeys = [neededProperty]
         let viewController = UIApplication.shared.delegate?.window??.rootViewController
@@ -32,40 +34,4 @@ public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin, CNContact
             result(FlutterMethodNotImplemented)
         }
   }
-    
-    private class ContactPickerDelegate : NSObject, CNContactPickerDelegate {
-        
-        private let result: FlutterResult
-        private let type: String
-        
-        init(result: @escaping FlutterResult, type: String) {
-            self.result = result
-            self.type = type
-        }
-        
-        public func contactPicker(_ picker: CNContactPickerViewController, didSelect contactProperty: CNContactProperty) {
-            let fullName = CNContactFormatter.string(from: contactProperty.contact, style: CNContactFormatterStyle.fullName)
-            let itemRaw = contactProperty.value
-            var item: Any?
-            if(itemRaw is CNPhoneNumber) {
-                item = (itemRaw as! CNPhoneNumber).stringValue
-            } else {
-                item = itemRaw
-            }
-            let label = CNLabeledValue<NSString>.localizedString(forLabel: contactProperty.label!)
-            let dict = [
-                "fullName": fullName as Any,
-                type: [
-                    type: item,
-                    "label": label
-                ],
-                ] as [String : Any]
-            result(dict)
-        }
-        
-        public func contactPickerDidCancel(_ picker: CNContactPickerViewController) {
-            result(nil)
-        }
-        
-    }
 }

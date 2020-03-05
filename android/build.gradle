@@ -1,5 +1,5 @@
-group 'com.example.fluttercontactpicker'
-version '2.1.1-SNAPSHOT'
+group 'me.schlaubi.fluttercontactpicker'
+version '2.1.2-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.3.70'

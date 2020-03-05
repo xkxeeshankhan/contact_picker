@@ -1,3 +1,5 @@
+## 2.1.2
+- Fix iOS implementation
 ## 2.1.1
 - Remove debug messages
 ## 2.1.0
