@@ -1,6 +1,6 @@
-# fluttercontactpicker_example
+# example
 
-Demonstrates how to use the fluttercontactpicker plugin.
+A new Flutter project.
 
 ## Getting Started
 

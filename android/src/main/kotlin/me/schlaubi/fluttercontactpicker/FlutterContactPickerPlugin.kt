@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.net.Uri
 import android.provider.ContactsContract
 import android.util.Log
-import androidx.annotation.NonNull
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -21,9 +20,8 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
 
     private var activityBinding: ActivityBinding? = null
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    override fun onMethodCall(call: MethodCall, result: Result) {
         when (call.method) {
-            "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
             "pickPhoneContact" -> requestPicker(PICK_PHONE, ContactsContract.CommonDataKinds.Phone.CONTENT_URI, result)
             "pickEmailContact" -> requestPicker(PICK_EMAIL, ContactsContract.CommonDataKinds.Email.CONTENT_URI, result)
             else -> result.notImplemented()
@@ -109,8 +107,10 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
 
         companion object {
             fun fromPluginBinding(binding: ActivityPluginBinding) = object : ActivityBinding {
+
                 override val activity: Activity
                     get() = binding.activity
+
 
                 override fun addActivityResultListener(listener: PluginRegistry.ActivityResultListener) = binding.addActivityResultListener(listener)
 
@@ -125,21 +125,30 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
         @Suppress("unused") // Backwards compatibility for v1 plugins
         fun registerWith(registrar: PluginRegistry.Registrar) {
             registerChannel(registrar.messenger(), FlutterContactPickerPlugin()).apply {
-                setupActivity(object : ActivityBinding {
+                setupActivity(object : ActivityBinding, PluginRegistry.ActivityResultListener {
+
+                    private val registeredListeners = mutableListOf<PluginRegistry.ActivityResultListener>()
 
                     init {
                         Log.w("FlutterContactPicker", "Using Flutter v1 plugins is not recommended consider upgrading")
+                        registrar.addActivityResultListener(this)
                     }
 
                     override val activity: Activity
                         get() = registrar.activity()
 
                     override fun addActivityResultListener(listener: PluginRegistry.ActivityResultListener) {
-                        registrar.addActivityResultListener(listener)
+                        registeredListeners.add(listener)
                     }
 
                     override fun removeActivityResultListener(listener: PluginRegistry.ActivityResultListener) {
                         Log.w("FlutterContactPicker", "Consider Upgrading to v2 embedded plugins")
+                        registeredListeners.remove(listener)
+                    }
+
+                    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+                        registeredListeners.forEach { it.onActivityResult(requestCode, resultCode, data) }
+                        return true
                     }
 
                 })

@@ -1,3 +1,8 @@
+## 2.2.0
+- Fix bug preventing more than one contact request
+- Fix example
+- Upgrade example
+- Remove some example code
 ## 2.1.2
 - Fix iOS implementation
 ## 2.1.1
