@@ -15,6 +15,7 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
+import java.util.concurrent.CopyOnWriteArrayList
 
 class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
 
@@ -37,7 +38,13 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
 
     private inner class ContactPickerDelegate(private val flutterResult: Result) : PluginRegistry.ActivityResultListener {
 
-        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent): Boolean {
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
+            if (data == null) {
+                val binding = activityBinding ?: error("Missing activity")
+                binding.removeActivityResultListener(this)
+                return false
+            }
+
             when (requestCode) {
                 PICK_EMAIL -> processContact(data, "email", ::buildEmailAddress)
                 PICK_PHONE -> processContact(data, "phoneNumber", ::buildPhoneNumber)
@@ -66,7 +73,7 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
             val customLabel = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL))
             val label = ContactsContract.CommonDataKinds.Phone.getTypeLabel(activity.resources, phoneType, customLabel) as String
             val number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-            return mapOf("phoneNumber" to number, "label" to label)
+            return mapOf("phoneNumber" to number, label(label))
         }
 
         private fun buildEmailAddress(cursor: Cursor, activity: Activity): Map<String, String> {
@@ -74,8 +81,10 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
             val customLabel = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.LABEL))
             val label = ContactsContract.CommonDataKinds.Email.getTypeLabel(activity.resources, phoneType, customLabel) as String
             val address = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
-            return mapOf("email" to address, "label" to label)
+            return mapOf("email" to address, label(label))
         }
+
+        private fun label(label: String) = "label" to label
     }
 
     fun setupActivity(binding: ActivityBinding) {
@@ -127,7 +136,7 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
             registerChannel(registrar.messenger(), FlutterContactPickerPlugin()).apply {
                 setupActivity(object : ActivityBinding, PluginRegistry.ActivityResultListener {
 
-                    private val registeredListeners = mutableListOf<PluginRegistry.ActivityResultListener>()
+                    private val registeredListeners = CopyOnWriteArrayList<PluginRegistry.ActivityResultListener>()
 
                     init {
                         Log.w("FlutterContactPicker", "Using Flutter v1 plugins is not recommended consider upgrading")

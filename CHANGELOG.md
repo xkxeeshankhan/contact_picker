@@ -1,3 +1,5 @@
+## 2.2.1
+- Fix crash when canceling pick on android
 ## 2.2.0
 - Fix bug preventing more than one contact request
 - Fix example
