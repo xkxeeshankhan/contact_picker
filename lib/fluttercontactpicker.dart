@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 ///Plugin to interact with contact Pickers
 class FlutterContactPicker {
   static const MethodChannel _channel =
-      const MethodChannel('fluttercontactpicker');
+      const MethodChannel('me.schlaubi.contactpicker');
 
   ///Picks a Phone contact
   static Future<PhoneContact> pickPhoneContact() async => PhoneContact.fromMap(
