@@ -1,5 +1,5 @@
 # fluttercontactpicker
-[![pub.de](https://img.shields.io/badge/pub-2.3.1-green.svg)](https://pub.dev/packages/fluttercontactpicker#-readme-tab-)
+[![pub.dev](https://img.shields.io/badge/pub-2.3.1-green.svg)](https://pub.dev/packages/fluttercontactpicker#-readme-tab-)
 
 Interact with native OS contact pickers using Flutter
 
