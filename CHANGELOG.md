@@ -1,3 +1,7 @@
+## 2.3.1
+- Fix plugin handling every intent
+## 2.3.0
+- Fix activity listeners (#1)
 ## 2.2.1
 - Fix crash when canceling pick on android
 ## 2.2.0

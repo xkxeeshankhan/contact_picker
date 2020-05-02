@@ -12,7 +12,6 @@ abstract class AbstractPickContext : PickContext {
     override fun addActivityResultListener(listener: PluginRegistry.ActivityResultListener) = listeners.add(listener).run { Unit }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
-        listeners.forEach { it.onActivityResult(requestCode, resultCode, data) }
-        return true
+        return listeners.any { it.onActivityResult(requestCode, resultCode, data) }
     }
 }
