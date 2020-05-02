@@ -8,7 +8,7 @@ public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin {
     private var pickerDelegate: CNContactPickerDelegate?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "fluttercontactpicker", binaryMessenger: registrar.messenger())
+        let channel = FlutterMethodChannel(name: "me.schlaubi.contactpicker", binaryMessenger: registrar.messenger())
         let instance = SwiftFlutterContactPickerPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
     }

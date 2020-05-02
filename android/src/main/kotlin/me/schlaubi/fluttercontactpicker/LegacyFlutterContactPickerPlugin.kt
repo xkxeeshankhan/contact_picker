@@ -12,6 +12,7 @@ class LegacyFlutterContactPickerPlugin(private val registrar: PluginRegistry.Reg
 
     init {
         registrar.addActivityResultListener(context)
+        MethodChannel(registrar.messenger(), FlutterContactPickerPlugin.FLUTTER_CONTACT_PICKER).setMethodCallHandler(this)
     }
 
     override fun onMethodCall(call: MethodCall, result: MethodChannel.Result) {

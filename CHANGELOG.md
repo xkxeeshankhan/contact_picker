@@ -1,3 +1,5 @@
+## 2.3.2
+- Fix legacy implementation
 ## 2.3.1
 - Fix plugin handling every intent
 ## 2.3.0
