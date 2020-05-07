@@ -13,7 +13,9 @@ class FlutterContactPicker {
 
   ///Picks an Email contact
   static Future<EmailContact> pickEmailContact() async => EmailContact.fromMap(
-      await _channel.invokeMethod<Map<dynamic, dynamic>>("pickEmailContact"));
+      await _channel.invokeMethod<Map<dynamic, dynamic>>("pickCpickEmailContactontact"));
+
+  static Future<String> pickContact() async => (await _channel.invokeMethod<Map<dynamic, dynamic>>("pickContact")).toString();
 
 }
 

@@ -1,39 +1,23 @@
 package me.schlaubi.fluttercontactpicker
 
 import android.app.Activity
-import android.provider.ContactsContract
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
 
-class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
+class FlutterContactPickerPlugin : AbstractFlutterContactPickerPlugin(), FlutterPlugin, ActivityAware {
 
-    private var channel: MethodChannel? = null
     private var activity: ActivityPluginBinding? = null
-    private val context: PickContext = V2Context()
+    override val context: PickContext = V2Context()
 
-
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        when (call.method) {
-            "pickPhoneContact" -> ContactPicker.requestPicker(PICK_PHONE, ContactsContract.CommonDataKinds.Phone.CONTENT_URI, result, context)
-            "pickEmailContact" -> ContactPicker.requestPicker(PICK_EMAIL, ContactsContract.CommonDataKinds.Email.CONTENT_URI, result, context)
-            else -> result.notImplemented()
-        }
-    }
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(binding.binaryMessenger, FLUTTER_CONTACT_PICKER)
-        channel?.setMethodCallHandler(this)
+        registerChannel(binding.binaryMessenger)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel?.setMethodCallHandler(null)
-        channel = null
+        unregisterChannel()
     }
 
     override fun onDetachedFromActivity() {
@@ -59,6 +43,7 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
 
         const val PICK_PHONE = 2015
         const val PICK_EMAIL = 2020
+        const val PICK_CONTACT = 2029
         const val FLUTTER_CONTACT_PICKER = "me.schlaubi.contactpicker"
     }
 
