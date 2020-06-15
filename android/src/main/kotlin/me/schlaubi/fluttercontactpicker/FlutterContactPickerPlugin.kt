@@ -1,6 +1,7 @@
 package me.schlaubi.fluttercontactpicker
 
 import android.app.Activity
+import android.content.Context
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
@@ -9,14 +10,17 @@ import io.flutter.plugin.common.PluginRegistry
 class FlutterContactPickerPlugin : AbstractFlutterContactPickerPlugin(), FlutterPlugin, ActivityAware {
 
     private var activity: ActivityPluginBinding? = null
+    private var pluginBinding: FlutterPlugin.FlutterPluginBinding? = null
     override val context: PickContext = V2Context()
 
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        pluginBinding = binding
         registerChannel(binding.binaryMessenger)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
+        pluginBinding = null
         unregisterChannel()
     }
 
@@ -25,17 +29,17 @@ class FlutterContactPickerPlugin : AbstractFlutterContactPickerPlugin(), Flutter
         activity = null
     }
 
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) = onAttachedToActivity(binding)
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding): Unit = onAttachedToActivity(binding)
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         binding.addActivityResultListener(context)
+        binding.addRequestPermissionsResultListener(PermissionUtil)
         activity = binding
     }
 
-    override fun onDetachedFromActivityForConfigChanges() = onDetachedFromActivity()
+    override fun onDetachedFromActivityForConfigChanges(): Unit = onDetachedFromActivity()
 
     companion object {
-
         @JvmStatic
         @Suppress("unused") // Backwards compatibility for v1 plugins
         fun registerWith(registrar: PluginRegistry.Registrar) = LegacyFlutterContactPickerPlugin(registrar)
@@ -52,5 +56,10 @@ class FlutterContactPickerPlugin : AbstractFlutterContactPickerPlugin(), Flutter
         override val activity: Activity
             get() = this@FlutterContactPickerPlugin.activity?.activity ?: error("No Activity")
 
+        override val context: Context
+            get() = this@FlutterContactPickerPlugin.pluginBinding?.applicationContext
+                    ?: error("No context")
+
     }
+
 }

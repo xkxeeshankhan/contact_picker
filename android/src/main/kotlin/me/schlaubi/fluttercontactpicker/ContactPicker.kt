@@ -2,13 +2,32 @@ package me.schlaubi.fluttercontactpicker
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
+import android.os.Build
 import android.provider.ContactsContract
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
 
-class ContactPicker private constructor(private val pickContext: PickContext, private val result: MethodChannel.Result) : PluginRegistry.ActivityResultListener {
+class ContactPicker private constructor(private val pickContext: PickContext, private val result: MethodChannel.Result, askForPermission: Boolean, private val requestCode: Int, private val type: Uri) : PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
+
+    init {
+        val hasPermission = PermissionUtil.hasPermission(pickContext.context) || (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && requestCode != FlutterContactPickerPlugin.PICK_CONTACT) // below android 11 there is no need for permissions when only requesting email/phone number
+        if (!hasPermission && askForPermission) {
+            PermissionUtil.requestPermission(pickContext.activity, this)
+        } else if (hasPermission) {
+            requestPicker()
+        } else {
+            result.error("INSUFFICIENT_PERMISSIONS", "The READ_CONTACTS permission has not been granted", null)
+        }
+    }
+
+    private fun requestPicker() {
+        val pickerIntent = Intent(Intent.ACTION_PICK, type)
+        pickContext.addActivityResultListener(this)
+        pickContext.activity.startActivityForResult(pickerIntent, requestCode)
+    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         if (data == null) {
@@ -33,7 +52,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
     }
 
     private fun processContact(intent: Intent, dataProcessor: (Cursor, Activity) -> Map<String, Any?>) {
-        val data = intent.data!!
+        val data = intent.data ?: return
         val activity = pickContext.activity
         activity.contentResolver.query(data, null, null, null, null).use {
             require(it != null) { "Cursor must not be null" }
@@ -52,7 +71,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         val phones = mutableListOf<Map<String, String>>()
         val addresses = mutableListOf<Map<String, String>>()
         activity.contentResolver.query(ContactsContract.RawContactsEntity.CONTENT_URI, null, "${ContactsContract.Data.CONTACT_ID} = ?", arrayOf(contactId.toString()), null, null).use {
-            require (it != null && it.moveToFirst()) { "Contact could not be found" }
+            require(it != null && it.moveToFirst()) { "Contact could not be found" }
             do {
                 when (it.getString(it.getColumnIndex(ContactsContract.RawContactsEntity.MIMETYPE))) {
                     ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE -> instantMessengers += buildInstantMessenger(it, activity)
@@ -63,7 +82,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
                 }
             } while (it.moveToNext())
         }
-        return mapOf("name" to name, "instantMessengers" to instantMessengers, "phones" to phones, "addresses" to addresses)
+        return mapOf("name" to name, "instantMessengers" to instantMessengers, "phones" to phones, "addresses" to addresses, "emails" to emails)
     }
 
     private fun buildInstantMessenger(cursor: Cursor, activity: Activity): Map<String, String> {
@@ -139,12 +158,26 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
 
     private fun label(label: String) = "label" to label
 
-    companion object {
-        fun requestPicker(requestCode: Int, type: Uri, result: MethodChannel.Result, context: PickContext) {
-            val picker = ContactPicker(context, result)
-            val pickerIntent = Intent(Intent.ACTION_PICK, type)
-            context.addActivityResultListener(picker)
-            context.activity.startActivityForResult(pickerIntent, requestCode)
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray): Boolean {
+        if (requestCode == PERMISSION_REQUEST) {
+            if (grantResults.isNotEmpty() &&
+                    grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                requestPicker()
+            } else {
+                result.error("INSUFFICIENT_PERMISSIONS", "The READ_CONTACTS permission has not been granted", null)
+            }
+            PermissionUtil.remove(this)
+            return true
         }
+        return false
+    }
+
+    companion object {
+
+        const val PERMISSION_REQUEST = 5498
+
+        fun requestPicker(requestCode: Int, type: Uri, result: MethodChannel.Result, context: PickContext, askForPermission: Boolean) =
+                ContactPicker(context, result, askForPermission, requestCode, type)
+
     }
 }

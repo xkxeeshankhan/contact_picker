@@ -9,7 +9,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
@@ -17,8 +16,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
-    home: MainWidget(),
-  );
+        home: MainWidget(),
+      );
 }
 
 class MainWidget extends StatefulWidget {
@@ -33,56 +32,84 @@ class _MainWidgetState extends State<MainWidget> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Plugin example app'),
-    ),
-    body: Column(
-      children: <Widget>[
-        if(_emailContact != null) Column(children: <Widget>[
-          const Text("Email contact:"),
-          Text("Name: ${_emailContact.fullName}"),
-          Text("Email: ${_emailContact.email.email} (${_emailContact.email.label})")
-        ],),
-        if(_phoneContact != null) Column(children: <Widget>[
-          const Text("Phone contact:"),
-          Text("Name: ${_phoneContact.fullName}"),
-          Text("Phone: ${_phoneContact.phoneNumber.number} (${_phoneContact.phoneNumber.label})")
-        ],),
-       if(_contact != null) Text(_contact),
-        RaisedButton(
-          child: const Text("pick phone contact"),
-          onPressed: () async {
-            final PhoneContact contact =
-            await FlutterContactPicker.pickPhoneContact();
-            print(contact);
-            setState(() {
-              _phoneContact = contact;
-            });
-          },
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
         ),
-        RaisedButton(
-          child: const Text("pick email contact"),
-          onPressed: () async {
-            final EmailContact contact =
-            await FlutterContactPicker.pickEmailContact();
-            print(contact);
-            setState(() {
-              _emailContact = contact;
-            });
-          },
+        body: Column(
+          children: <Widget>[
+            if (_emailContact != null)
+              Column(
+                children: <Widget>[
+                  const Text("Email contact:"),
+                  Text("Name: ${_emailContact.fullName}"),
+                  Text(
+                      "Email: ${_emailContact.email.email} (${_emailContact.email.label})")
+                ],
+              ),
+            if (_phoneContact != null)
+              Column(
+                children: <Widget>[
+                  const Text("Phone contact:"),
+                  Text("Name: ${_phoneContact.fullName}"),
+                  Text(
+                      "Phone: ${_phoneContact.phoneNumber.number} (${_phoneContact.phoneNumber.label})")
+                ],
+              ),
+            if (_contact != null) Text(_contact),
+            RaisedButton(
+              child: const Text("pick phone contact"),
+              onPressed: () async {
+                final PhoneContact contact =
+                    await FlutterContactPicker.pickPhoneContact();
+                print(contact);
+                setState(() {
+                  _phoneContact = contact;
+                });
+              },
+            ),
+            RaisedButton(
+              child: const Text("pick email contact"),
+              onPressed: () async {
+                final EmailContact contact =
+                    await FlutterContactPicker.pickEmailContact();
+                print(contact);
+                setState(() {
+                  _emailContact = contact;
+                });
+              },
+            ),
+            RaisedButton(
+              child: const Text("pick full contact"),
+              onPressed: () async {
+                final String contact = (await FlutterContactPicker.pickContact()).toString();
+                setState(() {
+                  _contact = contact;
+                });
+              },
+            ),
+            RaisedButton(
+              child: const Text('Check permission'),
+              onPressed: () async {
+                final granted = await FlutterContactPicker.hasPermission();
+                showDialog(
+                    context: context,
+                    child: AlertDialog(
+                        title: const Text('Granted: '),
+                        content: Text('$granted')));
+              },
+            ),
+            RaisedButton(
+              child: const Text('Request permission'),
+              onPressed: () async {
+                final granted = await FlutterContactPicker.requestPermission();
+                showDialog(
+                    context: context,
+                    child: AlertDialog(
+                        title: const Text('Granted: '),
+                        content: Text('$granted')));
+              },
+            ),
+          ],
         ),
-        RaisedButton(
-          child: const Text("pick full contact"),
-          onPressed: () async {
-            final String contact =
-            await FlutterContactPicker.pickContact();
-            print(contact);
-            setState(() {
-              _contact = contact;
-            });
-          },
-        )
-      ],
-    ),
-  );
+      );
 }
