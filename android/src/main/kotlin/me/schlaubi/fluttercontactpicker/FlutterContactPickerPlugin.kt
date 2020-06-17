@@ -1,39 +1,27 @@
 package me.schlaubi.fluttercontactpicker
 
 import android.app.Activity
-import android.provider.ContactsContract
+import android.content.Context
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
-import io.flutter.plugin.common.MethodChannel.MethodCallHandler
-import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugin.common.PluginRegistry
 
-class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandler {
+class FlutterContactPickerPlugin : AbstractFlutterContactPickerPlugin(), FlutterPlugin, ActivityAware {
 
-    private var channel: MethodChannel? = null
     private var activity: ActivityPluginBinding? = null
-    private val context: PickContext = V2Context()
+    private var pluginBinding: FlutterPlugin.FlutterPluginBinding? = null
+    override val context: PickContext = V2Context()
 
-
-    override fun onMethodCall(call: MethodCall, result: Result) {
-        when (call.method) {
-            "pickPhoneContact" -> ContactPicker.requestPicker(PICK_PHONE, ContactsContract.CommonDataKinds.Phone.CONTENT_URI, result, context)
-            "pickEmailContact" -> ContactPicker.requestPicker(PICK_EMAIL, ContactsContract.CommonDataKinds.Email.CONTENT_URI, result, context)
-            else -> result.notImplemented()
-        }
-    }
 
     override fun onAttachedToEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(binding.binaryMessenger, FLUTTER_CONTACT_PICKER)
-        channel?.setMethodCallHandler(this)
+        pluginBinding = binding
+        registerChannel(binding.binaryMessenger)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
-        channel?.setMethodCallHandler(null)
-        channel = null
+        pluginBinding = null
+        unregisterChannel()
     }
 
     override fun onDetachedFromActivity() {
@@ -41,17 +29,17 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
         activity = null
     }
 
-    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) = onAttachedToActivity(binding)
+    override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding): Unit = onAttachedToActivity(binding)
 
     override fun onAttachedToActivity(binding: ActivityPluginBinding) {
         binding.addActivityResultListener(context)
+        binding.addRequestPermissionsResultListener(PermissionUtil)
         activity = binding
     }
 
-    override fun onDetachedFromActivityForConfigChanges() = onDetachedFromActivity()
+    override fun onDetachedFromActivityForConfigChanges(): Unit = onDetachedFromActivity()
 
     companion object {
-
         @JvmStatic
         @Suppress("unused") // Backwards compatibility for v1 plugins
         fun registerWith(registrar: PluginRegistry.Registrar) = LegacyFlutterContactPickerPlugin(registrar)
@@ -59,6 +47,7 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
 
         const val PICK_PHONE = 2015
         const val PICK_EMAIL = 2020
+        const val PICK_CONTACT = 2029
         const val FLUTTER_CONTACT_PICKER = "me.schlaubi.contactpicker"
     }
 
@@ -67,5 +56,10 @@ class FlutterContactPickerPlugin : FlutterPlugin, ActivityAware, MethodCallHandl
         override val activity: Activity
             get() = this@FlutterContactPickerPlugin.activity?.activity ?: error("No Activity")
 
+        override val context: Context
+            get() = this@FlutterContactPickerPlugin.pluginBinding?.applicationContext
+                    ?: error("No context")
+
     }
+
 }

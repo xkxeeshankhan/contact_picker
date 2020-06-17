@@ -13,11 +13,20 @@ public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin {
         registrar.addMethodCallDelegate(instance, channel: channel)
     }
     
-    private func requestPicker(result: @escaping FlutterResult, type: String, neededProperty: String) {
+    private func requestPicker(result: @escaping FlutterResult, type: String, neededProperty: String?) {
         let controller = CNContactPickerViewController()
         pickerDelegate = ContactPickerDelegate(result: result, type: type)
         controller.delegate = pickerDelegate
-        controller.displayedPropertyKeys = [neededProperty]
+        if(neededProperty != nil) {
+            controller.displayedPropertyKeys = [neededProperty!]
+        } else {
+            controller.displayedPropertyKeys = [
+                CNContactPhoneNumbersKey,
+                CNContactEmailAddressesKey,
+                CNContactPostalAddressesKey,
+                CNContactInstantMessageAddressesKey
+            ]
+        }
         let viewController = UIApplication.shared.delegate?.window??.rootViewController
         viewController?.present(controller, animated: true, completion: nil)
     }
@@ -30,6 +39,15 @@ public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin {
         case "pickEmailContact":
             requestPicker(result: result, type: "email", neededProperty: CNContactEmailAddressesKey)
             break
+//        case "pickContact":
+//            requestPicker(result: result, type: "full", neededProperty: nil)
+//            break;
+        case "hasPermission":
+            result(true)
+            break;
+        case "requestPermission":
+            result(true)
+            break;
         default:
             result(FlutterMethodNotImplemented)
         }
