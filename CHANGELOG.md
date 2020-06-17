@@ -1,3 +1,6 @@
+## 2.4.0
+- Provide API to fetch whole contact
+- Make picker Android 11 ready
 ## 2.3.2
 - Fix legacy implementation
 ## 2.3.1

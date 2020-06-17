@@ -26,6 +26,7 @@ class FlutterContactPicker {
   ///Picks a full contact
   ///Automatically checks for permission if [askForPermission] is true
   ///Always requires [hasPermission] to return true
+  /// Currently Android only because iOS does not provide api to select whole contact
   static Future<FullContact> pickContact(
           {bool askForPermission = true}) async =>
       FullContact.fromMap(await _channel.invokeMethod<Map<dynamic, dynamic>>(
@@ -194,13 +195,13 @@ class EmailAddress extends Labeled {
 class StructuredName {
   final String firstName;
   final String middleName;
-  final String nicktName;
+  final String nickName;
   final String lastName;
 
   StructuredName(
-      this.firstName, this.middleName, this.nicktName, this.lastName);
+      this.firstName, this.middleName, this.nickName, this.lastName);
 
-  factory StructuredName.ofMap(Map<dynamic, dynamic> map) => StructuredName(
+  factory StructuredName.fromMap(Map<dynamic, dynamic> map) => StructuredName(
       map['firstName'], map['middleName'], map['nickname'], map['lastName']);
 
   @override
@@ -317,14 +318,17 @@ class Address {
 }
 
 class FullContact {
+  final StructuredName name;
   final List<InstantMessenger> instantMessengers;
   final List<EmailAddress> emails;
   final List<PhoneNumber> phones;
   final List<Address> addresses;
 
-  FullContact(this.instantMessengers, this.emails, this.phones, this.addresses);
+  FullContact(this.instantMessengers, this.emails, this.phones, this.addresses, this.name);
 
-  factory FullContact.fromMap(Map<dynamic, dynamic> map) => FullContact(
+  factory FullContact.fromMap(Map<dynamic, dynamic> map) {
+    print(map);
+    return FullContact(
       (map['instantMessengers'] as List<dynamic>)
           .map((element) => InstantMessenger.fromMap(element))
           .cast<InstantMessenger>()
@@ -340,7 +344,10 @@ class FullContact {
       (map['addresses'] as List<dynamic>)
           .map((element) => Address.fromMap(element))
           .cast<Address>()
-          .toList(growable: false));
+          .toList(growable: false),
+          StructuredName.fromMap(map["name"])
+          );
+  }
 
   @override
   String toString() {
