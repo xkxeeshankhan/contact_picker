@@ -206,7 +206,7 @@ class StructuredName {
 
   @override
   String toString() {
-    return 'StructuredName{firstName: $firstName, middleName: $middleName, nicktName: $nicktName, lastName: $lastName}';
+    return 'StructuredName{firstName: $firstName, middleName: $middleName, nicktName: $nickName, lastName: $lastName}';
   }
 
   @override
@@ -216,14 +216,14 @@ class StructuredName {
           runtimeType == other.runtimeType &&
           firstName == other.firstName &&
           middleName == other.middleName &&
-          nicktName == other.nicktName &&
+          nickName == other.nickName &&
           lastName == other.lastName;
 
   @override
   int get hashCode =>
       firstName.hashCode ^
       middleName.hashCode ^
-      nicktName.hashCode ^
+      nickName.hashCode ^
       lastName.hashCode;
 }
 

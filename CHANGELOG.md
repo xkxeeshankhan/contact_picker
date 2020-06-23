@@ -1,3 +1,6 @@
+## 2.4.1
+- Fix type in fluttercontactpicker.dart
+- Fix SDK constraints
 ## 2.4.0
 - Provide API to fetch whole contact
 - Make picker Android 11 ready
