@@ -81,7 +81,8 @@ class _MainWidgetState extends State<MainWidget> {
             RaisedButton(
               child: const Text("pick full contact"),
               onPressed: () async {
-                final String contact = (await FlutterContactPicker.pickContact()).toString();
+                final String contact =
+                    (await FlutterContactPicker.pickContact()).toString();
                 setState(() {
                   _contact = contact;
                 });

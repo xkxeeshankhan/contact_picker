@@ -198,8 +198,7 @@ class StructuredName {
   final String nickName;
   final String lastName;
 
-  StructuredName(
-      this.firstName, this.middleName, this.nickName, this.lastName);
+  StructuredName(this.firstName, this.middleName, this.nickName, this.lastName);
 
   factory StructuredName.fromMap(Map<dynamic, dynamic> map) => StructuredName(
       map['firstName'], map['middleName'], map['nickname'], map['lastName']);
@@ -324,29 +323,29 @@ class FullContact {
   final List<PhoneNumber> phones;
   final List<Address> addresses;
 
-  FullContact(this.instantMessengers, this.emails, this.phones, this.addresses, this.name);
+  FullContact(this.instantMessengers, this.emails, this.phones, this.addresses,
+      this.name);
 
   factory FullContact.fromMap(Map<dynamic, dynamic> map) {
     print(map);
     return FullContact(
-      (map['instantMessengers'] as List<dynamic>)
-          .map((element) => InstantMessenger.fromMap(element))
-          .cast<InstantMessenger>()
-          .toList(growable: false),
-      (map['emails'] as List<dynamic>)
-          .map((element) => EmailAddress.fromMap(element))
-          .cast<EmailAddress>()
-          .toList(growable: false),
-      (map['phones'] as List<dynamic>)
-          .map((element) => PhoneNumber.fromMap(element))
-          .cast<PhoneNumber>()
-          .toList(growable: false),
-      (map['addresses'] as List<dynamic>)
-          .map((element) => Address.fromMap(element))
-          .cast<Address>()
-          .toList(growable: false),
-          StructuredName.fromMap(map["name"])
-          );
+        (map['instantMessengers'] as List<dynamic>)
+            .map((element) => InstantMessenger.fromMap(element))
+            .cast<InstantMessenger>()
+            .toList(growable: false),
+        (map['emails'] as List<dynamic>)
+            .map((element) => EmailAddress.fromMap(element))
+            .cast<EmailAddress>()
+            .toList(growable: false),
+        (map['phones'] as List<dynamic>)
+            .map((element) => PhoneNumber.fromMap(element))
+            .cast<PhoneNumber>()
+            .toList(growable: false),
+        (map['addresses'] as List<dynamic>)
+            .map((element) => Address.fromMap(element))
+            .cast<Address>()
+            .toList(growable: false),
+        StructuredName.fromMap(map["name"]));
   }
 
   @override
