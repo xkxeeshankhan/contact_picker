@@ -27,7 +27,10 @@ public class SwiftFlutterContactPickerPlugin: NSObject, FlutterPlugin {
                 CNContactInstantMessageAddressesKey
             ]
         }
-        let viewController = UIApplication.shared.delegate?.window??.rootViewController
+        var viewController = UIApplication.shared.delegate?.window??.rootViewController
+        while ((viewController?.presentedViewController) != nil) {
+            viewController = viewController?.presentedViewController
+        }
         viewController?.present(controller, animated: true, completion: nil)
     }
     
