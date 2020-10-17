@@ -1,15 +1,19 @@
 package me.schlaubi.fluttercontactpicker
 
 import android.app.Activity
+import android.content.ContentResolver
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.database.CursorIndexOutOfBoundsException
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.provider.ContactsContract
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
+import java.io.ByteArrayOutputStream
 
 class ContactPicker private constructor(private val pickContext: PickContext, private val result: MethodChannel.Result, askForPermission: Boolean, private val requestCode: Int, private val type: Uri) : PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
@@ -51,45 +55,55 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         return true
     }
 
-    private fun processDisplayNamed(intent: Intent, dataName: String, dataProcessor: (Cursor, Activity) -> Map<String, String>) {
-        val processor = { cursor: Cursor, activity: Activity ->
-            buildDisplayNamed(cursor, dataName, dataProcessor(cursor, activity))
+    private fun processDisplayNamed(intent: Intent, dataName: String, dataProcessor: (Cursor, Activity, Uri) -> Map<String, String>) {
+        val processor = { cursor: Cursor, activity: Activity, uri: Uri ->
+            buildDisplayNamed(cursor, dataName, dataProcessor(cursor, activity, uri))
         }
         return processContact(intent, processor)
     }
 
-    private fun processContact(intent: Intent, dataProcessor: (Cursor, Activity) -> Map<String, Any?>) {
+    private fun processContact(intent: Intent, dataProcessor: (Cursor, Activity, Uri) -> Map<String, Any?>) {
         val data = intent.data ?: return
         val activity = pickContext.activity
         activity.contentResolver.query(data, null, null, null, null).use {
             require(it != null) { "Cursor must not be null" }
             it.moveToFirst()
-            val processedData = dataProcessor(it, activity)
+            val processedData = dataProcessor(it, activity, data)
             this.result.success(processedData)
         }
         pickContext.removeActivityResultListener(this)
     }
 
-    private fun buildContact(cursor: Cursor, activity: Activity): Map<String, Any?> {
+    private fun buildContact(cursor: Cursor, activity: Activity, data: Uri): Map<String, Any?> {
         val contactId = cursor.getLong(cursor.getColumnIndex(ContactsContract.Contacts._ID))
         var name: Map<String, String>? = null
         val instantMessengers = mutableListOf<Map<String, String>>()
         val emails = mutableListOf<Map<String, String>>()
         val phones = mutableListOf<Map<String, String>>()
         val addresses = mutableListOf<Map<String, String>>()
+        val photo = buildPhoto(activity.contentResolver, data)
         activity.contentResolver.query(ContactsContract.RawContactsEntity.CONTENT_URI, null, "${ContactsContract.Data.CONTACT_ID} = ?", arrayOf(contactId.toString()), null, null).use {
             require(it != null && it.moveToFirst()) { "Contact could not be found" }
             do {
                 when (it.getString(it.getColumnIndex(ContactsContract.RawContactsEntity.MIMETYPE))) {
                     ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE -> instantMessengers += buildInstantMessenger(it, activity)
-                    ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE -> emails += buildEmailAddress(it, activity)
+                    ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE -> emails += buildEmailAddress(it, activity, data)
                     ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE -> addresses += buildAddress(it, activity)
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> phones += buildPhoneNumber(it, activity)
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> phones += buildPhoneNumber(it, activity, data)
                     ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE -> name = buildName(it)
                 }
             } while (it.moveToNext())
         }
-        return mapOf("name" to name, "instantMessengers" to instantMessengers, "phones" to phones, "addresses" to addresses, "emails" to emails)
+        return mapOf("name" to name, "instantMessengers" to instantMessengers, "phones" to phones, "addresses" to addresses, "emails" to emails, "photo" to photo)
+    }
+
+    private fun buildPhoto(contentResolver: ContentResolver, data: Uri): ByteArray? {
+        val photoStream = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver, data) ?: return null
+        val bitmap = photoStream.use { BitmapFactory.decodeStream(photoStream) }
+        val output = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
+        bitmap.recycle()
+        return output.toByteArray()
     }
 
     private fun buildInstantMessenger(cursor: Cursor, activity: Activity): Map<String, String> {
@@ -146,12 +160,12 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         return mapOf("fullName" to fullName, dataName to data)
     }
 
-    private fun buildPhoneNumber(cursor: Cursor, activity: Activity): Map<String, String> {
+    private fun buildPhoneNumber(cursor: Cursor, activity: Activity, data: Uri): Map<String, String> {
         val number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
         return buildLabeledItem(cursor, activity, ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.LABEL, "phoneNumber", number)
     }
 
-    private fun buildEmailAddress(cursor: Cursor, activity: Activity): Map<String, String> {
+    private fun buildEmailAddress(cursor: Cursor, activity: Activity, data: Uri): Map<String, String> {
         val address = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
         return buildLabeledItem(cursor, activity, ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.LABEL, "email", address)
     }

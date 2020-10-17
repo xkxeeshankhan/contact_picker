@@ -29,6 +29,7 @@ class _MainWidgetState extends State<MainWidget> {
   PhoneContact _phoneContact;
   EmailContact _emailContact;
   String _contact;
+  Image _contactPhoto;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -55,6 +56,7 @@ class _MainWidgetState extends State<MainWidget> {
                       "Phone: ${_phoneContact.phoneNumber.number} (${_phoneContact.phoneNumber.label})")
                 ],
               ),
+            if(_contactPhoto != null) _contactPhoto,
             if (_contact != null) Text(_contact),
             RaisedButton(
               child: const Text("pick phone contact"),
@@ -81,10 +83,11 @@ class _MainWidgetState extends State<MainWidget> {
             RaisedButton(
               child: const Text("pick full contact"),
               onPressed: () async {
-                final String contact =
-                    (await FlutterContactPicker.pickContact()).toString();
+                final FullContact contact =
+                    (await FlutterContactPicker.pickFullContact());
                 setState(() {
-                  _contact = contact;
+                  _contact = contact.toString();
+                  _contactPhoto = contact.photo?.asWidget();
                 });
               },
             ),

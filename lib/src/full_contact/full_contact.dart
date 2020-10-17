@@ -1,7 +1,8 @@
-import 'address.dart';
 import '../email_address.dart';
-import 'instant_messenger.dart';
 import '../phone_number.dart';
+import 'address.dart';
+import 'instant_messenger.dart';
+import 'photo.dart';
 import 'structured_name.dart';
 
 class FullContact {
@@ -11,8 +12,11 @@ class FullContact {
   final List<PhoneNumber> phones;
   final List<Address> addresses;
 
+  /// The users profile picture (can be null if none is set)
+  final Photo photo;
+
   FullContact(this.instantMessengers, this.emails, this.phones, this.addresses,
-      this.name);
+      this.name, this.photo);
 
   factory FullContact.fromMap(Map<dynamic, dynamic> map) {
     return FullContact(
@@ -32,7 +36,8 @@ class FullContact {
             .map((element) => Address.fromMap(element))
             .cast<Address>()
             .toList(growable: false),
-        StructuredName.fromMap(map["name"]));
+        StructuredName.fromMap(map["name"]),
+        Photo.fromMap(map));
   }
 
   @override
@@ -43,12 +48,12 @@ class FullContact {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is FullContact &&
-              runtimeType == other.runtimeType &&
-              instantMessengers == other.instantMessengers &&
-              emails == other.emails &&
-              phones == other.phones &&
-              addresses == other.addresses;
+      other is FullContact &&
+          runtimeType == other.runtimeType &&
+          instantMessengers == other.instantMessengers &&
+          emails == other.emails &&
+          phones == other.phones &&
+          addresses == other.addresses;
 
   @override
   int get hashCode =>
