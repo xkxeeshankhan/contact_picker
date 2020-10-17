@@ -1,3 +1,5 @@
+## 2.4.3
+- Fix contacts not being returned on v1 embedding
 ## 2.4.2
 - Reformat code
 ## 2.4.1

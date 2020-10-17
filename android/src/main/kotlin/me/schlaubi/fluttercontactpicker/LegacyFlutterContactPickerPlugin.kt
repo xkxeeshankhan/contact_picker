@@ -10,6 +10,7 @@ class LegacyFlutterContactPickerPlugin(private val registrar: PluginRegistry.Reg
 
     init {
         registrar.addRequestPermissionsResultListener(PermissionUtil)
+        registrar.addActivityResultListener(context)
         registerChannel(registrar.messenger())
     }
 
