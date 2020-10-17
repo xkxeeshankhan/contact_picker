@@ -3,8 +3,13 @@
 
 Interact with native OS contact pickers using Flutter
 
-## Getting Started
+## Contents
+- [Getting Started](#getting-started)
+- [Features](#features)
+- [Permissions](#permissions)
 
+
+## Getting Started
 Grab contact.
 ```dart
 final PhoneContact contact =
@@ -12,3 +17,20 @@ final PhoneContact contact =
 ```
 
 For more info read the docs or take a look at the example
+
+## Features
+- Pick a phone/email contact using the OSs native contact picker
+- Pick a Full contact (Android only)
+
+## Permissions
+If you target Android 11+ (API 30+) you need to obtain the `android.permission.READ_CONTACTS` permission, which is declared as a library permission [here](https://github.com/DRSchlaubi/contact_picker/blob/master/android/src/main/AndroidManifest.xml#L3) this permission will be requested automatically if the `askForPermission` parameter is true.
+
+Alternatively you can request the permission manually with [FlutterContactPicker.requestPermission()](https://pub.dev/documentation/fluttercontactpicker/latest/fluttercontactpicker/FlutterContactPicker/requestPermission.html) or check with [FlutterContactPicker.hasPermission()](https://pub.dev/documentation/fluttercontactpicker/latest/fluttercontactpicker/FlutterContactPicker/hasPermission.html)
+
+## Obtain Full Contact (Android Only)
+**Note:** Unlike Android iOS does not offer a way to directly get a full contact from the ContactPicker therefore this library does not support it. Apple might add it in 2030 so stay tuned
+
+```dart
+final FullContact contact =
+                    await FlutterContactPicker.pickPhoneContact();
+```
