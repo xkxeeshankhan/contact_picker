@@ -1,5 +1,5 @@
 group 'me.schlaubi.fluttercontactpicker'
-version '2.4.3-SNAPSHOT'
+version '3.0.1-SNAPSHOT'
 
 buildscript {
     ext.kotlin_version = '1.4.10'

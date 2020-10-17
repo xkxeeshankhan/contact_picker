@@ -1,3 +1,8 @@
+## 3.0.1
+- Fix iOS issue (#6)
+## 3.0.0
+- Update Library code
+- Add Support for profile pictures
 ## 2.4.3
 - Fix contacts not being returned on v1 embedding
 ## 2.4.2

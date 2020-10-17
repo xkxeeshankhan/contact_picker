@@ -1,5 +1,5 @@
 # fluttercontactpicker
-[![pub.dev](https://img.shields.io/badge/pub-2.4.3-green.svg)](https://pub.dev/packages/fluttercontactpicker#-readme-tab-)
+[![pub.dev](https://img.shields.io/badge/pub-3.0.0-green.svg)](https://pub.dev/packages/fluttercontactpicker#-readme-tab-)
 
 Interact with native OS contact pickers using Flutter
 
@@ -34,3 +34,9 @@ Alternatively you can request the permission manually with [FlutterContactPicker
 final FullContact contact =
                     await FlutterContactPicker.pickPhoneContact();
 ```
+
+### Obtain profile picture
+The FullContact class has a `photo` property if the picked contact has an avatar. You can use the `asWidget()` method to get a renderable `Image` widget.
+
+
+Full documentation: https://pub.dev/documentation/fluttercontactpicker/latest/fluttercontactpicker/fluttercontactpicker-library.html
