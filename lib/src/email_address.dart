@@ -17,9 +17,9 @@ class EmailAddress extends Labeled {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is EmailAddress &&
-              runtimeType == other.runtimeType &&
-              email == other.email;
+      other is EmailAddress &&
+          runtimeType == other.runtimeType &&
+          email == other.email;
 
   @override
   int get hashCode => email.hashCode;

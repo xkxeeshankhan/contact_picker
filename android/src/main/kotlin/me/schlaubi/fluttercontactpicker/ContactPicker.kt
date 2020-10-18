@@ -81,6 +81,11 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         val emails = mutableListOf<Map<String, String>>()
         val phones = mutableListOf<Map<String, String>>()
         val addresses = mutableListOf<Map<String, String>>()
+        var note: String? = null
+        var company: String? = null
+        var sip: String? = null
+        val relations = mutableListOf<Map<String, String>>()
+        val customFields = mutableListOf<Map<String, String>>()
         val photo = buildPhoto(activity.contentResolver, data)
         activity.contentResolver.query(ContactsContract.RawContactsEntity.CONTENT_URI, null, "${ContactsContract.Data.CONTACT_ID} = ?", arrayOf(contactId.toString()), null, null).use {
             require(it != null && it.moveToFirst()) { "Contact could not be found" }
@@ -91,19 +96,39 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
                     ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE -> addresses += buildAddress(it, activity)
                     ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> phones += buildPhoneNumber(it, activity, data)
                     ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE -> name = buildName(it)
+                    ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE -> note = getNote(it)
+                    ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE -> company = getCompany(it)
+                    ContactsContract.CommonDataKinds.Relation.CONTENT_ITEM_TYPE -> relations += buildRelation(it)
+                    ContactsContract.CommonDataKinds.SipAddress.CONTENT_ITEM_TYPE -> sip = getSip(it)
+                    "vnd.com.google.cursor.item/contact_user_defined_field" -> customFields += buildCustomField(it)
                 }
             } while (it.moveToNext())
         }
-        return mapOf("name" to name, "instantMessengers" to instantMessengers, "phones" to phones, "addresses" to addresses, "emails" to emails, "photo" to photo)
+        return mapOf("name" to name, "instantMessengers" to instantMessengers, "phones" to phones, "addresses" to addresses, "emails" to emails, "photo" to photo, "note" to note, "company" to company, "sip" to sip, "relations" to relations, "custom_fields" to customFields)
     }
 
+    private fun getCompany(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Organization.COMPANY))
+
+    private fun getNote(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
+
+    private fun getSip(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS))
+
     private fun buildPhoto(contentResolver: ContentResolver, data: Uri): ByteArray? {
-        val photoStream = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver, data) ?: return null
+        val photoStream = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver, data)
+                ?: return null
         val bitmap = photoStream.use { BitmapFactory.decodeStream(photoStream) }
-        val output = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, output)
-        bitmap.recycle()
-        return output.toByteArray()
+        return ByteArrayOutputStream().use {
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+            bitmap.recycle()
+            it.toByteArray()
+        }
+    }
+
+    private fun buildCustomField(cursor: Cursor): Map<String, String> {
+        val field = cursor.getString(cursor.getColumnIndex("data2"))
+        val label = cursor.getString(cursor.getColumnIndex("data1"))
+
+        return mapOf("field" to field, "label" to label)
     }
 
     private fun buildInstantMessenger(cursor: Cursor, activity: Activity): Map<String, String> {
@@ -120,6 +145,29 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
                 "im" to im,
                 "protocol" to actualProtocol
         )
+    }
+
+    private fun buildRelation(cursor: Cursor): Map<String, String> {
+        val name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.NAME))
+        val type = when (val typeInt = cursor.getInt(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.TYPE))) {
+            ContactsContract.CommonDataKinds.Relation.TYPE_ASSISTANT -> "assistant"
+            ContactsContract.CommonDataKinds.Relation.TYPE_BROTHER -> "brother"
+            ContactsContract.CommonDataKinds.Relation.TYPE_CHILD -> "child"
+            ContactsContract.CommonDataKinds.Relation.TYPE_DOMESTIC_PARTNER -> "domestic_partner"
+            ContactsContract.CommonDataKinds.Relation.TYPE_FATHER -> "father"
+            ContactsContract.CommonDataKinds.Relation.TYPE_FRIEND -> "friend"
+            ContactsContract.CommonDataKinds.Relation.TYPE_MANAGER -> "manager"
+            ContactsContract.CommonDataKinds.Relation.TYPE_MOTHER -> "mother"
+            ContactsContract.CommonDataKinds.Relation.TYPE_PARENT -> "parent"
+            ContactsContract.CommonDataKinds.Relation.TYPE_PARTNER -> "partner"
+            ContactsContract.CommonDataKinds.Relation.TYPE_REFERRED_BY -> "referred_by"
+            ContactsContract.CommonDataKinds.Relation.TYPE_RELATIVE -> "relative"
+            ContactsContract.CommonDataKinds.Relation.TYPE_SISTER -> "sister"
+            ContactsContract.CommonDataKinds.Relation.TYPE_SPOUSE -> "spouse"
+            else -> error("Unknown type: $typeInt")
+        }
+
+        return mapOf("name" to name, "type" to type)
     }
 
     private fun buildAddress(cursor: Cursor, activity: Activity): Map<String, String> {
@@ -160,12 +208,12 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         return mapOf("fullName" to fullName, dataName to data)
     }
 
-    private fun buildPhoneNumber(cursor: Cursor, activity: Activity, data: Uri): Map<String, String> {
+    private fun buildPhoneNumber(cursor: Cursor, activity: Activity, @Suppress("UNUSED_PARAMETER") data: Uri): Map<String, String> {
         val number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
         return buildLabeledItem(cursor, activity, ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.LABEL, "phoneNumber", number)
     }
 
-    private fun buildEmailAddress(cursor: Cursor, activity: Activity, data: Uri): Map<String, String> {
+    private fun buildEmailAddress(cursor: Cursor, activity: Activity, @Suppress("UNUSED_PARAMETER") data: Uri): Map<String, String> {
         val address = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
         return buildLabeledItem(cursor, activity, ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.LABEL, "email", address)
     }

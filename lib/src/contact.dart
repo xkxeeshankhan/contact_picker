@@ -12,9 +12,9 @@ abstract class Contact {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Contact &&
-              runtimeType == other.runtimeType &&
-              fullName == other.fullName;
+      other is Contact &&
+          runtimeType == other.runtimeType &&
+          fullName == other.fullName;
 
   @override
   int get hashCode => fullName.hashCode;

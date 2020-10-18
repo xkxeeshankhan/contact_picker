@@ -27,5 +27,15 @@ class Photo {
 
   /// Returns the Image as an [Image]
   /// See [Image.memory]
-  Image asWidget() => Image.memory(_bytes);
+  Image asWidget({
+    double scale = 1.0,
+    int cacheWidth,
+    int cacheHeight,
+  }) =>
+      Image.memory(
+        _bytes,
+        scale: scale,
+        cacheHeight: cacheHeight,
+        cacheWidth: cacheWidth,
+      );
 }

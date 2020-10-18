@@ -1,3 +1,12 @@
+# 3.1.0
+- Add Support for more types in Full Contact
+  - Note
+  - Company
+  - SIP
+  - Relations
+  - Custom fields (Google Contacts app only)
+- Add Kotlin 1.4.0 Note to README
+- Fix hashCode(), ==() and toString() implementations to reflect new properties
 ## 3.0.1
 - Fix iOS issue (#6)
 ## 3.0.0
