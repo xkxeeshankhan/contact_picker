@@ -34,7 +34,7 @@ Alternatively you can request the permission manually with [FlutterContactPicker
 
 ```dart
 final FullContact contact =
-                    await FlutterContactPicker.pickPhoneContact();
+                    await FlutterContactPicker.pickFullContact();
 ```
 
 ### Obtain profile picture
