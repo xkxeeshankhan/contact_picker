@@ -1,3 +1,5 @@
+# 3.1.1-nullsafety.0
+- Add nullsafety
 # 3.1.1
 - Fix crash on xiaomi (#12)
 - Update Kotlin to 1.4.20
