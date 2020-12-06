@@ -18,6 +18,9 @@
       <excludeFolder url="file://$MODULE_DIR$/contact_picker_platform_interface/build" />
       <excludeFolder url="file://$MODULE_DIR$/contact_picker_platform_interface/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/contact_picker_platform_interface/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/contact_picker_web/build" />
+      <excludeFolder url="file://$MODULE_DIR$/contact_picker_web/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/contact_picker_web/.pub" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -2,125 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2d25e0e-53db-406a-b03d-8810e3a4cc78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/CHANGELOG.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/LICENSE" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/contact.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/contact_picker_platform_interface.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/email_address.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/email_contact.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/full_contact/address.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/full_contact/custom_field.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/full_contact/full_contact.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/full_contact/instant_messenger.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/full_contact/photo.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/full_contact/relation.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/full_contact/structured_name.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/labeled.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/method_channel_contact_picker.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/phone_contact.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/phone_number.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/contact_picker_platform_interface/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CHANGELOG.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/AbstractFlutterContactPickerPlugin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/AbstractPickContext.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/ContactPicker.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/ContactPickingException.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/FlutterContactPickerPlugin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/LegacyFlutterContactPickerPlugin.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/PermissionUtil.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/kotlin/me/schlaubi/fluttercontactpicker/PickContext.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/.metadata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/analysis_options.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/debug/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/kotlin/com/example/example/MainActivity.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/res/drawable/launch_background.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-mdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-xhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/res/values/styles.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/app/src/profile/AndroidManifest.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/build.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/gradle.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/android/settings.gradle" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/AppFrameworkInfo.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Debug.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Flutter/Release.xcconfig" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/AppDelegate.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Base.lproj/LaunchScreen.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Base.lproj/Main.storyboard" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Info.plist" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/ios/Runner/Runner-Bridging-Header.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/test/widget_test.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Assets/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/FlutterContactPickerDelegate.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/FlutterContactPickerPlugin.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/FlutterContactPickerPlugin.m" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Classes/SwiftFlutterContactPickerPlugin.swift" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/fluttercontactpicker.podspec" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/fluttercontactpicker.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/contact.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/email_address.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/email_contact.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/full_contact/address.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/full_contact/custom_field.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/full_contact/full_contact.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/full_contact/instant_messenger.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/full_contact/photo.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/full_contact/relation.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/full_contact/structured_name.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/interface.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/labeled.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/phone_contact.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/src/phone_number.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/fluttercontactpicker_test.dart" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/contact_picker_web/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contact_picker_web/lib/contact_picker_plugin.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contact_picker_web/lib/js_functions/check_availability.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contact_picker_web/lib/js_functions/open_picker.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/contact_picker_web/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/contact_picker.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/contact_picker.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/fluttercontactpicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/lib/fluttercontactpicker.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/contact.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/email_address.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/email_contact.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/full_contact/address.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/full_contact/custom_field.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/full_contact/full_contact.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/full_contact/instant_messenger.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/full_contact/photo.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/full_contact/relation.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/full_contact/structured_name.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/interface.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/lib/src/interface.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/labeled.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/phone_contact.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/lib/src/phone_number.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -158,7 +64,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/contact_picker_platform_interface/lib" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/contact_picker_web" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -174,6 +80,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="T:\FlutterProjects\contact_picker\contact_picker_web" />
       <recent name="T:\FlutterProjects\contact_picker\contact_picker_platform_interface\lib" />
       <recent name="T:\FlutterProjects\contact_picker\contact_picker_platform_interface" />
     </key>
@@ -203,7 +110,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1607270357089</updated>
-      <workItem from="1607270363160" duration="2754000" />
+      <workItem from="1607270363160" duration="9322000" />
     </task>
     <servers />
   </component>
