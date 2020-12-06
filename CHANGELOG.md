@@ -1,3 +1,5 @@
+# 3.1.1-nullsafety.1
+- Fix some issues with null safety
 # 3.1.1-nullsafety.0
 - Add nullsafety
 # 3.1.1
