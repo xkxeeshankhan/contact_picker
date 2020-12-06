@@ -19,9 +19,9 @@ class EmailContact extends Contact {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is EmailContact &&
-              runtimeType == other.runtimeType &&
-              email == other.email;
+      other is EmailContact &&
+          runtimeType == other.runtimeType &&
+          email == other.email;
 
   @override
   int get hashCode => email.hashCode;

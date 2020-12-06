@@ -19,9 +19,9 @@ class PhoneContact extends Contact {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is PhoneContact &&
-              runtimeType == other.runtimeType &&
-              phoneNumber == other.phoneNumber;
+      other is PhoneContact &&
+          runtimeType == other.runtimeType &&
+          phoneNumber == other.phoneNumber;
 
   @override
   int get hashCode => phoneNumber.hashCode;

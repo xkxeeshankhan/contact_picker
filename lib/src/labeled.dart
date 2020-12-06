@@ -12,9 +12,9 @@ abstract class Labeled {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Labeled &&
-              runtimeType == other.runtimeType &&
-              label == other.label;
+      other is Labeled &&
+          runtimeType == other.runtimeType &&
+          label == other.label;
 
   @override
   int get hashCode => label.hashCode;

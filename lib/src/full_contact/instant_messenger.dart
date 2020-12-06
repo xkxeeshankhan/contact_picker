@@ -18,12 +18,12 @@ class InstantMessenger {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is InstantMessenger &&
-              runtimeType == other.runtimeType &&
-              type == other.type &&
-              customLabel == other.customLabel &&
-              im == other.im &&
-              protocol == other.protocol;
+      other is InstantMessenger &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          customLabel == other.customLabel &&
+          im == other.im &&
+          protocol == other.protocol;
 
   @override
   int get hashCode =>

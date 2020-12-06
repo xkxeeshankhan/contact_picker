@@ -17,12 +17,12 @@ class StructuredName {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is StructuredName &&
-              runtimeType == other.runtimeType &&
-              firstName == other.firstName &&
-              middleName == other.middleName &&
-              nickName == other.nickName &&
-              lastName == other.lastName;
+      other is StructuredName &&
+          runtimeType == other.runtimeType &&
+          firstName == other.firstName &&
+          middleName == other.middleName &&
+          nickName == other.nickName &&
+          lastName == other.lastName;
 
   @override
   int get hashCode =>

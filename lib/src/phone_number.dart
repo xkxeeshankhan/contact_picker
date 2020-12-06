@@ -17,9 +17,9 @@ class PhoneNumber extends Labeled {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is PhoneNumber &&
-              runtimeType == other.runtimeType &&
-              number == other.number;
+      other is PhoneNumber &&
+          runtimeType == other.runtimeType &&
+          number == other.number;
 
   @override
   int get hashCode => number.hashCode;

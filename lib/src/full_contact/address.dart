@@ -31,17 +31,17 @@ class Address {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is Address &&
-              runtimeType == other.runtimeType &&
-              type == other.type &&
-              customLabel == other.customLabel &&
-              street == other.street &&
-              pobox == other.pobox &&
-              neighborhood == other.neighborhood &&
-              city == other.city &&
-              region == other.region &&
-              postcode == other.postcode &&
-              country == other.country;
+      other is Address &&
+          runtimeType == other.runtimeType &&
+          type == other.type &&
+          customLabel == other.customLabel &&
+          street == other.street &&
+          pobox == other.pobox &&
+          neighborhood == other.neighborhood &&
+          city == other.city &&
+          region == other.region &&
+          postcode == other.postcode &&
+          country == other.country;
 
   @override
   int get hashCode =>
