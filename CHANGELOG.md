@@ -1,3 +1,7 @@
+# 3.1.1
+- Fix crash on xiaomi (#12)
+- Update Kotlin to 1.4.20
+- Update Gradle to 6.7.1
 # 3.1.0
 - Add Support for more types in Full Contact
   - Note
