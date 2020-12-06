@@ -1,13 +1,13 @@
 class Address {
   final int type;
-  final String customLabel;
-  final String street;
-  final String pobox;
-  final String neighborhood;
-  final String city;
-  final String region;
-  final String postcode;
-  final String country;
+  final String? customLabel;
+  final String? street;
+  final String? pobox;
+  final String? neighborhood;
+  final String? city;
+  final String? region;
+  final String? postcode;
+  final String? country;
 
   Address(this.type, this.customLabel, this.street, this.pobox,
       this.neighborhood, this.city, this.region, this.postcode, this.country);

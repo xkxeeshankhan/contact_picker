@@ -1,7 +1,7 @@
 import '../labeled.dart';
 
 class CustomField extends Labeled {
-  final String name;
+  final String? name;
 
   const CustomField(this.name, String label) : super(label);
 

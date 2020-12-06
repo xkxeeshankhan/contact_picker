@@ -2,7 +2,7 @@ abstract class Labeled {
   const Labeled(this.label);
 
   ///Label of the labeled item
-  final String label;
+  final String? label;
 
   @override
   String toString() {

@@ -45,46 +45,32 @@ RelationType _typeByName(String name) {
   switch (name) {
     case 'assistant':
       return RelationType.assistant;
-      break;
     case 'brother':
       return RelationType.brother;
-      break;
     case 'child':
       return RelationType.child;
-      break;
     case 'domestic_partner':
       return RelationType.domestic_partner;
-      break;
     case 'father':
       return RelationType.father;
-      break;
     case 'friend':
       return RelationType.friend;
-      break;
     case 'manager':
       return RelationType.manager;
-      break;
     case 'mother':
       return RelationType.mother;
-      break;
     case 'parent':
       return RelationType.parent;
-      break;
     case 'partner':
       return RelationType.partner;
-      break;
     case 'referred_by':
       return RelationType.referred_by;
-      break;
     case 'relative':
       return RelationType.relative;
-      break;
     case 'sister':
       return RelationType.sister;
-      break;
     case 'spouse':
       return RelationType.spouse;
-      break;
     default:
       throw ArgumentError('Invalid name: $name');
   }

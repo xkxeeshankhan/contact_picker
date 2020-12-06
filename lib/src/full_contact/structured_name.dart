@@ -1,8 +1,8 @@
 class StructuredName {
-  final String firstName;
-  final String middleName;
-  final String nickName;
-  final String lastName;
+  final String? firstName;
+  final String? middleName;
+  final String? nickName;
+  final String? lastName;
 
   StructuredName(this.firstName, this.middleName, this.nickName, this.lastName);
 
