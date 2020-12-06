@@ -1,3 +1,6 @@
+# 3.2.0-nullsafety.2
+- Fix dependency problem
+- Upgrade version
 # 3.1.1-nullsafety.1
 - Fix some issues with null safety
 # 3.1.1-nullsafety.0
