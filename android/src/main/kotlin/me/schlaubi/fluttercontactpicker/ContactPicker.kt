@@ -18,7 +18,7 @@ import java.io.ByteArrayOutputStream
 class ContactPicker private constructor(private val pickContext: PickContext, private val result: MethodChannel.Result, askForPermission: Boolean, private val requestCode: Int, private val type: Uri) : PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
     init {
-        val hasPermission = PermissionUtil.hasPermission(pickContext.context) || (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && requestCode != FlutterContactPickerPlugin.PICK_CONTACT) // below android 11 there is no need for permissions when only requesting email/phone number
+        val hasPermission = PermissionUtil.hasPermission(pickContext.context) || ("xiaomi" !in Build.MANUFACTURER.toLowerCase() /* Cool android OEMs think it's cool to not do what Android does */ && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && requestCode != FlutterContactPickerPlugin.PICK_CONTACT) // below android 11 there is no need for permissions when only requesting email/phone number
         if (!hasPermission && askForPermission) {
             PermissionUtil.requestPermission(pickContext.activity, this)
         } else if (hasPermission) {
