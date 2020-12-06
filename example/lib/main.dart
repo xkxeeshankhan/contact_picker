@@ -56,7 +56,7 @@ class _MainWidgetState extends State<MainWidget> {
                       "Phone: ${_phoneContact.phoneNumber.number} (${_phoneContact.phoneNumber.label})")
                 ],
               ),
-            if(_contactPhoto != null) _contactPhoto,
+            if (_contactPhoto != null) _contactPhoto,
             if (_contact != null) Text(_contact),
             RaisedButton(
               child: const Text("pick phone contact"),
@@ -97,7 +97,7 @@ class _MainWidgetState extends State<MainWidget> {
                 final granted = await FlutterContactPicker.hasPermission();
                 showDialog(
                     context: context,
-                    child: AlertDialog(
+                    builder: (context) => AlertDialog(
                         title: const Text('Granted: '),
                         content: Text('$granted')));
               },
@@ -108,7 +108,7 @@ class _MainWidgetState extends State<MainWidget> {
                 final granted = await FlutterContactPicker.requestPermission();
                 showDialog(
                     context: context,
-                    child: AlertDialog(
+                    builder: (context) => AlertDialog(
                         title: const Text('Granted: '),
                         content: Text('$granted')));
               },
