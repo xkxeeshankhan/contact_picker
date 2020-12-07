@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/contact_picker/contact_picker.iml" filepath="$PROJECT_DIR$/contact_picker/contact_picker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contact_picker_platform_interface/contact_picker_platform_interface.iml" filepath="$PROJECT_DIR$/contact_picker_platform_interface/contact_picker_platform_interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contact_picker_web/contact_picker_web.iml" filepath="$PROJECT_DIR$/contact_picker_web/contact_picker_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contact_picker/example/android/app/src/debug/debug.iml" filepath="$PROJECT_DIR$/contact_picker/example/android/app/src/debug/debug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/contact_picker/example/android/app/src/profile/profile.iml" filepath="$PROJECT_DIR$/contact_picker/example/android/app/src/profile/profile.iml" />
+    </modules>
+  </component>
+</project>
