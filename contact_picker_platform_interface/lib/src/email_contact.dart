@@ -1,5 +1,5 @@
-import 'contact.dart';
 import 'email_address.dart';
+import 'contact.dart';
 
 ///Email Contact
 class EmailContact extends Contact {

@@ -18,12 +18,10 @@ packages:
   contact_picker_platform_interface:
     dependency: "direct main"
     description:
-      path: contact_picker_platform_interface
-      ref: "feature/null_safety"
-      resolved-ref: ff6cfee50dd596d5b6e0bfb646b069ce72be02ba
-      url: "https://github.com/niggelgame/contact_picker.git"
-    source: git
-    version: "1.0.0"
+      path: "../contact_picker_platform_interface"
+      relative: true
+    source: path
+    version: "4.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -76,4 +74,4 @@ packages:
     version: "2.1.0-nullsafety.5"
 sdks:
   dart: ">=2.12.0-0 <3.0.0"
-  flutter: ">=1.24.0-3.0.pre <2.0.0"
+  flutter: ">=1.24.0-10.2.pre <2.0.0"

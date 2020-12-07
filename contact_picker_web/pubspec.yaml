@@ -1,5 +1,5 @@
 name: contact_picker_web
-version: 0.0.1
+version: 4.0.0
 description: Use Chromes contact picker to chose phone numbers and email addresses from contacts of the users address book
 homepage: https://github.com/DRSchlaubi/contact_picker
 
@@ -7,7 +7,7 @@ flutter:
   plugin:
     platforms:
       web:
-        pluginClass: ContactPickerPlugin
+        pluginClass: WebContactPickerPlugin
         fileName: contact_picker_web.dart
 
 dependencies:
@@ -15,13 +15,10 @@ dependencies:
     sdk: flutter
   flutter_web_plugins:
     sdk: flutter
-  js: ^0.6.3-nullsafety.3
+  js: ^0.6.2
   contact_picker_platform_interface:
-    git:
-      url: https://github.com/niggelgame/contact_picker.git
-      ref: feature/null_safety
-      path: contact_picker_platform_interface
+    path: ../contact_picker_platform_interface
 
 environment:
-  sdk: ">=2.12.0-0 <3.0.0"
-  flutter: ">=1.24.0-3.0.pre <2.0.0"
+  sdk: ">=2.11.0 <3.0.0"
+  flutter: ">=1.24.0-10.2.pre <2.0.0"

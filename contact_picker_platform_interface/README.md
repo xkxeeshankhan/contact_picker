@@ -1,5 +1,7 @@
 # contact_picker_platform_interface
 
+Main package: https://github.com/DRSchlaubi/contact_picker
+
 A common platform interface for the [`contact_picker`][1] plugin.
 
 This interface allows platform-specific implementations of the `contact_picker`
@@ -23,4 +25,4 @@ See https://flutter.dev/go/platform-interface-breaking-changes for a discussion
 on why a less-clean interface is preferable to a breaking change.
 
 [1]: ../contact_picker
-[2]: lib/contact_picker_platform_interface.dart
+[2]: lib/src/platform.dart
