@@ -3,6 +3,7 @@
     <CLASSES>
       <root url="file://$PROJECT_DIR$/contact_picker_web" />
       <root url="file://$PROJECT_DIR$/contact_picker" />
+      <root url="file://C:/flutter/.pub-cache/hosted/pub.dartlang.org/contact_picker_web-4.0.1" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

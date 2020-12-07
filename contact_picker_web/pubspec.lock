@@ -18,10 +18,10 @@ packages:
   contact_picker_platform_interface:
     dependency: "direct main"
     description:
-      path: "../contact_picker_platform_interface"
-      relative: true
-    source: path
-    version: "4.0.0"
+      name: contact_picker_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "4.0.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -74,4 +74,4 @@ packages:
     version: "2.1.0-nullsafety.5"
 sdks:
   dart: ">=2.12.0-0 <3.0.0"
-  flutter: ">=1.24.0-10.2.pre <2.0.0"
+  flutter: ">=1.22.0 <2.0.0"

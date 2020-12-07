@@ -1,3 +1,12 @@
+# 4.0.2
+
+- Run dartfmt
+
+# 4.0.1
+
+- Fix sdk constraints
+- Fix build errors on mobile
+
 # 4.0.0
 
 - Support web (Massive thanks to @Niggelgame for making this possible)
@@ -9,7 +18,7 @@
 
 # 3.1.1-nullsafety.1
 
-- Fix some issues with null safety
+- Fix some issues with nulla safety
 
 # 3.1.1-nullsafety.0
 

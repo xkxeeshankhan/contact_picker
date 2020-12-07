@@ -80,7 +80,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         val instantMessengers = mutableListOf<Map<String, String>>()
         val emails = mutableListOf<Map<String, String>>()
         val phones = mutableListOf<Map<String, String>>()
-        val addresses = mutableListOf<Map<String, String>>()
+        val addresses = mutableListOf<Map<String, Any>>()
         var note: String? = null
         var company: String? = null
         var sip: String? = null
@@ -170,12 +170,12 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         return mapOf("name" to name, "type" to type)
     }
 
-    private fun buildAddress(cursor: Cursor, activity: Activity): Map<String, String> {
+    private fun buildAddress(cursor: Cursor, activity: Activity): Map<String, Any> {
         val type = cursor.getInt(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.TYPE))
         val customLabel = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.LABEL))
 
         val label = ContactsContract.CommonDataKinds.StructuredPostal.getTypeLabel(activity.resources, type, customLabel).toString()
-        val street = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.STREET))
+        val addressLine = listOf(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.STREET)))
         val pobox = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.POBOX))
         val neighborhood = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.NEIGHBORHOOD))
         val city = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.StructuredPostal.CITY))
@@ -185,7 +185,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
 
         return mapOf(
                 label(label),
-                "street" to street,
+                "addressLine" to addressLine,
                 "pobox" to pobox,
                 "neighborhood" to neighborhood,
                 "city" to city,
