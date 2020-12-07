@@ -19,8 +19,7 @@ class MethodChannelContactPicker extends ContactPickerPlatform {
           'pickEmailContact', {'askForPermission': askForPermission})));
 
   @override
-  Future<FullContact> pickFullContact(
-      {bool askForPermission = true}) async =>
+  Future<FullContact> pickFullContact({bool askForPermission = true}) async =>
       FullContact.fromMap((await _channel.invokeMethod<Map<dynamic, dynamic>>(
           'pickContact', {'askForPermission': askForPermission})));
 

@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:contact_picker_platform_interface/contact_picker_platform_interface.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:js/js_util.dart';
+
 import 'js/availability.js.dart' as availability;
 import 'js/picker.js.dart';
 

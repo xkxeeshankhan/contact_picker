@@ -17,7 +17,7 @@ Web demo: https://fcp.mik.wtf/web
 Grab contact.
 ```dart
 final PhoneContact contact =
-                    await FlutterContactPicker.pickPhoneContact();
+    await FlutterContactPicker.pickPhoneContact();
 ```
 
 For more info read the docs or take a look at the example
@@ -37,7 +37,7 @@ Alternatively you can request the permission manually with [FlutterContactPicker
 
 ```dart
 final FullContact contact =
-                    await FlutterContactPicker.pickFullContact();
+    await FlutterContactPicker.pickFullContact();
 ```
 
 ### Obtain profile picture

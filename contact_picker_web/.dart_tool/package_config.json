@@ -15,9 +15,9 @@
     },
     {
       "name": "contact_picker_platform_interface",
-      "rootUri": "../../contact_picker_platform_interface",
+      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/contact_picker_platform_interface-4.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.11"
+      "languageVersion": "2.1"
     },
     {
       "name": "flutter",
@@ -71,10 +71,10 @@
       "name": "contact_picker_web",
       "rootUri": "../",
       "packageUri": "lib/",
-      "languageVersion": "2.11"
+      "languageVersion": "2.2"
     }
   ],
-  "generated": "2020-12-07T18:53:26.696474Z",
+  "generated": "2020-12-07T20:18:43.342693Z",
   "generator": "pub",
   "generatorVersion": "2.12.0-29.10.beta"
 }
