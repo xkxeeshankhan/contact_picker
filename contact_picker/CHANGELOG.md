@@ -1,3 +1,5 @@
+# 4.1.0
+- Fix web support issues
 # 4.0.2
 
 - Run dartfmt
