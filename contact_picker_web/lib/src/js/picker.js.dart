@@ -3,12 +3,14 @@ library picker;
 
 import 'dart:html';
 
+import 'package:contact_picker_web/src/js/promise.js.dart';
 import 'package:js/js.dart';
 
 external List<String> getProperties();
 
 @JS('select')
-external List<dynamic> openPicker(List<String> props, Options options);
+external Promise<List<JSContact>> openPicker(
+    List<String> props, Options options);
 
 @JS()
 @anonymous
@@ -18,86 +20,40 @@ class Options {
   external factory Options({bool multiple});
 }
 
-List<T> castList<T>(dynamic rawList) {
-  var list = rawList as List<dynamic>;
-  if (list == null) {
-    return null;
-  }
-  if (list.isEmpty) {
-    return <T>[];
-  } else {
-    return list.cast<T>();
-  }
+@JS('ContactAddress')
+abstract class JSContact {
+  external List<String> get name;
+
+  external List<String> get email;
+
+  external List<String> get tel;
+
+  external List<Blob> get icon;
+
+  external List<JSAddress> get address;
 }
 
-List<T> _mapList<T>(dynamic rawList, T f(dynamic e)) {
-  var list = rawList as List<dynamic>;
-  if (list == null) {
-    return null;
-  }
-  if (list.isEmpty) {
-    return <T>[];
-  } else {
-    return list.map(f).toList(growable: false);
-  }
-}
+@JS('ContactAddress')
+abstract class JSAddress {
+  external String get city;
 
-class JSContact {
-  final List<dynamic> names;
+  external String get country;
 
-  final List<dynamic> emails;
+  external String get dependentLocality;
 
-  final List<dynamic> tels;
+  external String get organization;
 
-  final List<Blob> icons;
+  external String get phone;
 
-  final List<JsAddress> addresses;
+  external String get postalCode;
 
-  JSContact(this.names, this.emails, this.tels, this.icons, this.addresses);
+  external String get recipient;
 
-  factory JSContact.fromDynamic(dynamic obj) => JSContact(
-      castList<String>(obj.name),
-      castList<String>(obj.email),
-      castList<String>(obj.tel),
-      castList<Blob>(obj.icon),
-      _mapList(obj.address, (e) => JsAddress.fromDynamic(e)));
-}
+  external String get region;
 
-class JsAddress {
-  final String country;
-  final List<String> addressLine;
-  final String region;
-  final String city;
-  final String dependentLocality;
-  final String postalCode;
-  final String sortingCode;
-  final String organization;
-  final String recipient;
-  final String phone;
+  external String get sortingCode;
 
-  JsAddress(
-      this.country,
-      this.addressLine,
-      this.region,
-      this.city,
-      this.dependentLocality,
-      this.postalCode,
-      this.sortingCode,
-      this.organization,
-      this.recipient,
-      this.phone);
-
-  factory JsAddress.fromDynamic(dynamic obj) => JsAddress(
-      obj.country,
-      castList<String>(obj.addressLine),
-      obj.region,
-      obj.city,
-      obj.dependentLocality,
-      obj.postalCode,
-      obj.sortingCode,
-      obj.organization,
-      obj.recipient,
-      obj.phone);
+  external List<String> get addressLine;
 }
 
 class PickerProperties {

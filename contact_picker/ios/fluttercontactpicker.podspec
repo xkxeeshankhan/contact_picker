@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'fluttercontactpicker'
-  s.version          = '4.0.2'
+  s.version          = '4.1.0'
   s.summary          = 'Interact with native OS contact pickers using Flutter'
   s.description      = <<-DESC
 Interact with native OS contact pickers using Flutter

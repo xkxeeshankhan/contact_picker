@@ -3,6 +3,8 @@ import 'dart:html';
 import 'dart:typed_data';
 
 import 'package:contact_picker_platform_interface/contact_picker_platform_interface.dart';
+import 'package:contact_picker_web/contact_picker_web.dart';
+import 'package:contact_picker_web/src/js/promise.js.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:js/js_util.dart';
 
@@ -25,9 +27,8 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
 
   @override
   Future<PhoneContact> pickPhoneContact({bool askForPermission = true}) async =>
-      (await pickPhoneContacts(
-              askForPermission: askForPermission, multiple: false))
-          .first;
+      (_firstContact(pickPhoneContacts(
+          askForPermission: askForPermission, multiple: false)));
 
   @override
   Future<List<PhoneContact>> pickPhoneContacts(
@@ -37,15 +38,21 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
 
     return (await jsContacts).map((jsContact) {
       return PhoneContact(
-          jsContact.names.first, PhoneNumber(jsContact.tels.first, null));
+          jsContact.name.first, PhoneNumber(jsContact.tel.first, null));
     }).toList(growable: false);
+  }
+
+  Future<T> _firstContact<T>(Future<List<T>> future) async {
+    List<T> contacts = await future;
+    return contacts.isEmpty
+        ? throw UserCancelledPickingException()
+        : contacts.first;
   }
 
   @override
   Future<EmailContact> pickEmailContact({bool askForPermission = true}) async =>
-      (await pickEmailContacts(
-              askForPermission: askForPermission, multiple: false))
-          .first;
+      (_firstContact(pickEmailContacts(
+          askForPermission: askForPermission, multiple: false)));
 
   @override
   Future<List<EmailContact>> pickEmailContacts(
@@ -55,43 +62,44 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
 
     return (await jsContacts).map((jsContact) {
       return EmailContact(
-          jsContact.names.first, EmailAddress(jsContact.emails.first, null));
+          jsContact.name.first, EmailAddress(jsContact.email.first, null));
     }).toList(growable: false);
   }
 
   @override
   Future<FullContact> pickFullContact({bool askForPermission = true}) async =>
-      (await pickFullContacts()).first;
+      (_firstContact(pickFullContacts()));
 
   @override
   Future<List<FullContact>> pickFullContacts(
       {bool askForPermission = true, bool multiple = true}) async {
-    var properties = await promiseToFuture<List<dynamic>>(getProperties());
+    var properties = await getAvailableProperties();
     var jsContacts = _pickJsContact(
         properties.map((e) => e.toString()).toList(growable: false), multiple);
 
     var futures = (await jsContacts).map((jsContact) async {
-      var emails = jsContact.emails
+      var emails = jsContact.email
           .map((email) => EmailAddress(email, null))
           .toList(growable: false);
-      var phones = jsContact.tels
+      var phones = jsContact.tel
           .map((phone) => PhoneNumber(phone, null))
           .toList(growable: false);
-      var addresses = jsContact.addresses
-          .map((address) => Address(
-              country: address.country,
-              addressLine: address.addressLine,
-              region: address.region,
-              city: address.city,
-              dependentLocality: address.dependentLocality,
-              postcode: address.postalCode,
-              sortingCode: address.sortingCode,
-              organization: address.organization,
-              recipient: address.recipient,
-              phone: address.phone))
-          .toList(growable: false);
-      var name = StructuredName(jsContact.names.first, null, null, null);
-      var icon = await _parseIcon(jsContact.icons);
+      var addresses = jsContact.address.map((address) {
+        window.console.log(address);
+        return Address(
+            country: getProperty(address, 'country'),
+            addressLine: getProperty(address, 'addressLine'),
+            region: getProperty(address, 'region'),
+            city: getProperty(address, 'city'),
+            dependentLocality: getProperty(address, 'dependentLocality'),
+            postcode: getProperty(address, 'postalCode'),
+            sortingCode: getProperty(address, 'sortingCode'),
+            organization: getProperty(address, 'organization'),
+            recipient: getProperty(address, 'recipient'),
+            phone: getProperty(address, 'phone'));
+      }).toList(growable: false);
+      var name = StructuredName(jsContact.name.first, null, null, null);
+      var icon = await _parseIcon(jsContact.icon);
       return FullContact(<InstantMessenger>[], emails, phones, addresses, name,
           icon, null, null, null, <Relation>[], <CustomField>[]);
     }).toList(growable: false);
@@ -122,12 +130,10 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
     assert(available,
         'Picker is not available in this browser. Consider checking available');
 
-    var rawContacts = await promiseToFuture<List<dynamic>>(
-        openPicker(props, Options(multiple: multiple)));
+    List<dynamic> rawContacts =
+        await promiseAsFuture(openPicker(props, Options(multiple: multiple)));
 
-    return rawContacts
-        .map((e) => JSContact.fromDynamic(e))
-        .toList(growable: false);
+    return rawContacts.cast<JSContact>();
   }
 
   @override
