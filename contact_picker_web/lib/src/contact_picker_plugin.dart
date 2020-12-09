@@ -37,17 +37,20 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
         [PickerProperties.NAME_PROP, PickerProperties.TEL_PROP], multiple);
 
     return (await jsContacts).map((jsContact) {
-      return PhoneContact(
-          jsContact.name.first, PhoneNumber(jsContact.tel.first, null));
+      return PhoneContact(_firstOrNull(jsContact.name),
+          PhoneNumber(_firstOrNull(jsContact.tel), null));
     }).toList(growable: false);
   }
 
   Future<T> _firstContact<T>(Future<List<T>> future) async {
-    List<T> contacts = await future;
-    return contacts.isEmpty
-        ? throw UserCancelledPickingException()
-        : contacts.first;
+    var result = _firstOrNull(await future);
+    if (result == null) {
+      throw UserCancelledPickingException();
+    }
+    return result;
   }
+
+  T _firstOrNull<T>(List<T> list) => list.isEmpty ? null : list.first;
 
   @override
   Future<EmailContact> pickEmailContact({bool askForPermission = true}) async =>
@@ -61,8 +64,8 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
         [PickerProperties.NAME_PROP, PickerProperties.EMAIL_PROP], multiple);
 
     return (await jsContacts).map((jsContact) {
-      return EmailContact(
-          jsContact.name.first, EmailAddress(jsContact.email.first, null));
+      return EmailContact(_firstOrNull(jsContact.name),
+          EmailAddress(_firstOrNull(jsContact.email), null));
     }).toList(growable: false);
   }
 
@@ -98,7 +101,7 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
             recipient: getProperty(address, 'recipient'),
             phone: getProperty(address, 'phone'));
       }).toList(growable: false);
-      var name = StructuredName(jsContact.name.first, null, null, null);
+      var name = StructuredName(_firstOrNull(jsContact.name), null, null, null);
       var icon = await _parseIcon(jsContact.icon);
       return FullContact(<InstantMessenger>[], emails, phones, addresses, name,
           icon, null, null, null, <Relation>[], <CustomField>[]);

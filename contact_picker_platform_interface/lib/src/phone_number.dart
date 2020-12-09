@@ -6,7 +6,7 @@ class PhoneNumber extends Labeled {
   factory PhoneNumber.fromMap(Map<dynamic, dynamic> map) =>
       PhoneNumber(map['phoneNumber'], map['label']);
 
-  ///The phone number
+  /// The phone number
   final String number;
 
   @override

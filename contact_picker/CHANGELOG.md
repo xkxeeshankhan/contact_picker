@@ -1,5 +1,25 @@
+# 4.2.1
+
+### Web fixes
+
+- Run dartfmt
+
+# 4.2.0
+
+### Interface fixes
+
+- Improve documentation
+
+### Web fixes
+
+- Update documentation
+- Better catch edgecases
+- Improve Exception description
+
 # 4.1.0
+
 - Fix web support issues
+
 # 4.0.2
 
 - Run dartfmt

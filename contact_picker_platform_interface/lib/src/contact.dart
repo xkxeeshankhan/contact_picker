@@ -2,6 +2,7 @@ abstract class Contact {
   const Contact(this.fullName);
 
   /// Full name of the contact
+  /// On Flutter Web this can be null if the user unselects name in the contact picker interface
   final String fullName;
 
   @override

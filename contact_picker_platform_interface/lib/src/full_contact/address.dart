@@ -1,20 +1,54 @@
+import 'full_contact.dart';
+
+/// This represents an address of a platform contact
+/// For web please see: https://wicg.github.io/contact-api/spec/#contactaddress
+/// For Androoid pllease see: https://tools.ietf.org/html/rfc6350
+/// See also [FullContact]
 class Address {
+  /// This can be null
   final int type;
+
+  /// This can be null
   final String customLabel;
+
+  /// This can be null
   final List<String> addressLine;
 
+  /// This can be null
   @Deprecated('Use addressLine instead')
   String get street => addressLine.first;
+
+  /// This can be null
   final String pobox;
+
+  /// This can be null
   final String neighborhood;
+
+  /// This can be null
   final String city;
+
+  /// This can be null
   final String region;
+
+  /// This can be null
   final String postcode;
+
+  /// This can be null
   final String sortingCode;
+
+  /// This can be null
   final String recipient;
+
+  /// This can be null
   final String country;
+
+  /// This can be null
   final String phone;
+
+  /// This can be null
   final String organization;
+
+  /// This can be null
   final String dependentLocality;
 
   Address(

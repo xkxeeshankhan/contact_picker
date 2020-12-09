@@ -9,6 +9,7 @@ class EmailContact extends Contact {
       EmailContact(map['fullName'], EmailAddress.fromMap(map['email']));
 
   /// Email of the contact
+  /// On Flutter Web this can be null if the user unselects email in the contact picker interface
   final EmailAddress email;
 
   @override

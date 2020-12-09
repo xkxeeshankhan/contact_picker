@@ -1,3 +1,7 @@
+# 4.2.0
+
+- Improve documentation
+
 # 4.0.2
 
 - Run dartfmt

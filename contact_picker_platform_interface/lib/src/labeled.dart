@@ -1,7 +1,8 @@
 abstract class Labeled {
   const Labeled(this.label);
 
-  ///Label of the labeled item
+  /// Label of the labeled item
+  /// Can be null if item can be labeled but has no label
   final String label;
 
   @override

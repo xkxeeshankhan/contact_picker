@@ -8,7 +8,8 @@ class PhoneContact extends Contact {
   factory PhoneContact.fromMap(Map<dynamic, dynamic> map) =>
       PhoneContact(map['fullName'], PhoneNumber.fromMap(map['phoneNumber']));
 
-  ///Phone number of the contact
+  /// Phone number of the contact
+  /// This can be null on Flutter Web in case the user unselects the phone number in the contact picker interface
   final PhoneNumber phoneNumber;
 
   @override

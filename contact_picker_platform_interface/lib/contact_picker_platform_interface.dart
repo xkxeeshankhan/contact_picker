@@ -11,7 +11,6 @@ export 'src/full_contact/photo.dart';
 export 'src/full_contact/relation.dart';
 export 'src/full_contact/structured_name.dart';
 export 'src/labeled.dart';
-export 'src/method_channel_contact_picker.dart';
 export 'src/phone_contact.dart';
 export 'src/phone_number.dart';
 export 'src/platform.dart';

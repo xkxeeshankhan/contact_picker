@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -37,35 +40,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c2d25e0e-53db-406a-b03d-8810e3a4cc78" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/contact_picker_web/lib/src/js/promise.js.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker/example/web/favicon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker/example/web/icons/Icon-192.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker/example/web/icons/Icon-512.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker/example/web/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker/example/web/manifest.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker/ios/fluttercontactpicker.podspec" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/ios/fluttercontactpicker.podspec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker/lib/fluttercontactpicker.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/lib/fluttercontactpicker.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/.dart_tool/package_config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/.dart_tool/package_config_subset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/.dart_tool/version" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/.packages" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/contact_picker_platform_interface.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/contact_picker_platform_interface.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/contact.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/contact.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/email_address.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/email_address.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/email_contact.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/email_contact.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/full_contact/address.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/full_contact/address.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/full_contact/custom_field.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/full_contact/custom_field.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/full_contact/full_contact.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/full_contact/full_contact.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/labeled.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/labeled.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/phone_contact.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/phone_contact.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/phone_number.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/lib/src/phone_number.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_platform_interface/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_platform_interface/pubspec.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker_web/.dart_tool/package_config.json" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/.dart_tool/package_config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker_web/.dart_tool/package_config_subset" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/.dart_tool/package_config_subset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker_web/.dart_tool/version" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/.dart_tool/version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker_web/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/.flutter-plugins" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker_web/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/.flutter-plugins-dependencies" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker_web/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker_web/CHANELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker_web/lib/contact_picker_web.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/lib/contact_picker_web.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_web/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/CHANGELOG.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker_web/lib/src/contact_picker_plugin.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/lib/src/contact_picker_plugin.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker_web/lib/src/js/picker.js.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/lib/src/js/picker.js.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/contact_picker_web/lib/src/picker_not_available_exception.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/lib/src/exceptions.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_web/lib/src/exceptions.dart" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/lib/src/exceptions.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/contact_picker_web/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/pubspec.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/contact_picker_web/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/contact_picker_web/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/assets/NOTICES" beforeDir="false" afterPath="$PROJECT_DIR$/docs/assets/NOTICES" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/flutter_service_worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/flutter_service_worker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/main.dart.js" beforeDir="false" afterPath="$PROJECT_DIR$/docs/main.dart.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,13 +149,15 @@
     </key>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -170,6 +179,7 @@
       <workItem from="1607282187635" duration="3390000" />
       <workItem from="1607352109826" duration="20747000" />
       <workItem from="1607440080200" duration="12806000" />
+      <workItem from="1607544703810" duration="2380000" />
     </task>
     <servers />
   </component>

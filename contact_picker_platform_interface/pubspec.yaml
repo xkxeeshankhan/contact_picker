@@ -3,7 +3,7 @@ description: A common platform interface for the contact_picker plugin.
 homepage: https://github.com/DRSchlaubi/contact_picker/tree/master/contact_picker_platform_interface
 # NOTE: We strongly prefer non-breaking changes, even at the expense of a
 # less-clean API. See https://flutter.dev/go/platform-interface-breaking-changes
-version: 4.0.2
+version: 4.2.0
 
 dependencies:
   flutter:

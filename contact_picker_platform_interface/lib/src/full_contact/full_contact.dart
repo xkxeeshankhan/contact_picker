@@ -7,6 +7,15 @@ import 'photo.dart';
 import 'relation.dart';
 import 'structured_name.dart';
 
+/// This represents a full contact
+/// See also [StructuredName]
+/// See also [InstantMessenger]
+/// See also [EmailAddress]
+/// See also [PhoneNumber]
+/// See also [Address]
+/// See also [Relation]
+/// See also [CustomField]
+/// See also [Photo]
 class FullContact {
   final StructuredName name;
   final List<InstantMessenger> instantMessengers;

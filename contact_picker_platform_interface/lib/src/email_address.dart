@@ -6,7 +6,7 @@ class EmailAddress extends Labeled {
   factory EmailAddress.fromMap(Map<dynamic, dynamic> map) =>
       EmailAddress(map['email'], map['label']);
 
-  ///The email address
+  /// The email address
   final String email;
 
   @override
