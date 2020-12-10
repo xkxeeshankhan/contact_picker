@@ -21,9 +21,11 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
   bool get available => availability.available;
 
   @override
-  Future<List<String>> getAvailableProperties() async =>
-      (await promiseToFuture<List<dynamic>>(getProperties()))?.cast<String>() ??
-      <String>[];
+  Future<List<String>> getAvailableProperties() async {
+    assert(available, () => PickerNotAvailableException());
+    return (await promiseToFuture<List<dynamic>>(getProperties()))
+        .cast<String>();
+  }
 
   @override
   Future<PhoneContact> pickPhoneContact({bool askForPermission = true}) async =>
@@ -50,7 +52,7 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
     return result;
   }
 
-  T _firstOrNull<T>(List<T> list) => list.isEmpty ? null : list.first;
+  T? _firstOrNull<T>(List<T> list) => list.isEmpty ? null : list.first;
 
   @override
   Future<EmailContact> pickEmailContact({bool askForPermission = true}) async =>
@@ -110,14 +112,14 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
     return Future.wait(futures);
   }
 
-  Future<Photo> _parseIcon(List<Blob> icons) async {
+  Future<Photo?> _parseIcon(List<Blob> icons) async {
     if (icons.isEmpty) return null;
     Completer<Photo> completer = Completer();
     var blob = icons[0];
 
     var reader = FileReader();
     reader.onError.listen((error) {
-      completer.completeError(reader.error);
+      completer.completeError(reader.error!);
     });
     reader.onLoadEnd.listen((event) {
       var buffer = reader.result as Uint8List;
@@ -130,8 +132,7 @@ class WebContactPickerPlugin extends ContactPickerPlatform {
 
   Future<List<JSContact>> _pickJsContact(
       List<String> props, bool multiple) async {
-    assert(available,
-        'Picker is not available in this browser. Consider checking available');
+    assert(available, () => PickerNotAvailableException());
 
     List<dynamic> rawContacts =
         await promiseAsFuture(openPicker(props, Options(multiple: multiple)));

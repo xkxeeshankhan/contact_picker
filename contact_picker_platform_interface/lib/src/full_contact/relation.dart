@@ -1,5 +1,5 @@
 class Relation {
-  final String name;
+  final String? name;
   final RelationType type;
 
   const Relation(this.name, this.type);
@@ -41,7 +41,7 @@ enum RelationType {
   spouse
 }
 
-RelationType _typeByName(String name) {
+RelationType _typeByName(String? name) {
   switch (name) {
     case 'assistant':
       return RelationType.assistant;

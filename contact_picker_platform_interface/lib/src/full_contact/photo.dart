@@ -19,8 +19,8 @@ class Photo {
   /// See [Image.memory]
   ImageProvider asResizedProvider({
     double scale = 1.0,
-    int cacheWidth,
-    int cacheHeight,
+    int? cacheWidth,
+    int? cacheHeight,
   }) =>
       ResizeImage.resizeIfNeeded(
           cacheWidth, cacheHeight, MemoryImage(_bytes, scale: scale));
@@ -29,8 +29,8 @@ class Photo {
   /// See [Image.memory]
   Image asWidget({
     double scale = 1.0,
-    int cacheWidth,
-    int cacheHeight,
+    int? cacheWidth,
+    int? cacheHeight,
   }) =>
       Image.memory(
         _bytes,

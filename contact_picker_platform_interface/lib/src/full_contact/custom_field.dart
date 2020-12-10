@@ -4,9 +4,9 @@ import '../labeled.dart';
 /// See [Labeled.label] for the value
 class CustomField extends Labeled {
   /// The name of the field
-  final String name;
+  final String? name;
 
-  const CustomField(this.name, String label) : super(label);
+  const CustomField(this.name, String? label) : super(label);
 
   factory CustomField.fromMap(Map<dynamic, dynamic> map) =>
       CustomField(map['name'], map['label']);

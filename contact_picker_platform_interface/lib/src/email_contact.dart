@@ -3,14 +3,14 @@ import 'contact.dart';
 
 ///Email Contact
 class EmailContact extends Contact {
-  const EmailContact(String fullName, this.email) : super(fullName);
+  const EmailContact(String? fullName, this.email) : super(fullName);
 
   factory EmailContact.fromMap(Map<dynamic, dynamic> map) =>
       EmailContact(map['fullName'], EmailAddress.fromMap(map['email']));
 
   /// Email of the contact
   /// On Flutter Web this can be null if the user unselects email in the contact picker interface
-  final EmailAddress email;
+  final EmailAddress? email;
 
   @override
   String toString() {

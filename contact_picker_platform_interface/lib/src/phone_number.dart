@@ -1,13 +1,13 @@
 import 'labeled.dart';
 
 class PhoneNumber extends Labeled {
-  const PhoneNumber(this.number, String label) : super(label);
+  const PhoneNumber(this.number, String? label) : super(label);
 
   factory PhoneNumber.fromMap(Map<dynamic, dynamic> map) =>
       PhoneNumber(map['phoneNumber'], map['label']);
 
   /// The phone number
-  final String number;
+  final String? number;
 
   @override
   String toString() {

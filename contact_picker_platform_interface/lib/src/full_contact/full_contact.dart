@@ -17,27 +17,27 @@ import 'structured_name.dart';
 /// See also [CustomField]
 /// See also [Photo]
 class FullContact {
-  final StructuredName name;
+  final StructuredName? name;
   final List<InstantMessenger> instantMessengers;
   final List<EmailAddress> emails;
   final List<PhoneNumber> phones;
   final List<Address> addresses;
 
   /// Can be null
-  final String note;
+  final String? note;
 
   /// Can be null
-  final String company;
+  final String? company;
 
   /// Can be null
-  final String sip;
+  final String? sip;
   final List<Relation> relations;
 
   /// This fields are for the Google contacts app only
   final List<CustomField> customFields;
 
   /// The users profile picture (can be null if none is set)
-  final Photo photo;
+  final Photo? photo;
 
   FullContact(
       this.instantMessengers,

@@ -17,7 +17,7 @@ external Promise<List<JSContact>> openPicker(
 class Options {
   external bool get multiple;
 
-  external factory Options({bool multiple});
+  external factory Options({required bool multiple});
 }
 
 @JS('ContactAddress')
