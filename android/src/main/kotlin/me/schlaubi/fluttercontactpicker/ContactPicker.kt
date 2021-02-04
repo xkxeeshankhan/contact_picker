@@ -109,7 +109,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
 
     private fun getCompany(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Organization.COMPANY))
 
-    private fun getNote(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
+    private fun getNote(it: Cursor): String? = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
 
     private fun getSip(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS))
 
