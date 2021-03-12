@@ -1,8 +1,8 @@
 class InstantMessenger {
   final int type;
-  final String customLabel;
-  final String im;
-  final String protocol;
+  final String? customLabel;
+  final String? im;
+  final String? protocol;
 
   InstantMessenger(this.type, this.customLabel, this.im, this.protocol);
 

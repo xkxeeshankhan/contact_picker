@@ -1,3 +1,19 @@
+# 4.3.0
+- Make Nullsafety the default
+
+# 4.3.0-nullsafety.4
+
+- Update some more constraints because the dart analyzer wants to make your life harder
+- Run dartfmt
+
+# 4.3.0-nullsafety.3
+
+- Update dependencies
+
+# 4.3.0-nullsafety.2
+
+- Initial release for nullsafety for 4.x
+
 # 4.2.1
 
 - Run dartfmt

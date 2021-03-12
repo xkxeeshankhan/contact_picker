@@ -6,50 +6,50 @@ import 'full_contact.dart';
 /// See also [FullContact]
 class Address {
   /// This can be null
-  final int type;
+  final int? type;
 
   /// This can be null
-  final String customLabel;
+  final String? customLabel;
 
   /// This can be null
-  final List<String> addressLine;
+  final List<String>? addressLine;
 
   /// This can be null
   @Deprecated('Use addressLine instead')
-  String get street => addressLine.first;
+  String get street => addressLine!.first;
 
   /// This can be null
-  final String pobox;
+  final String? pobox;
 
   /// This can be null
-  final String neighborhood;
+  final String? neighborhood;
 
   /// This can be null
-  final String city;
+  final String? city;
 
   /// This can be null
-  final String region;
+  final String? region;
 
   /// This can be null
-  final String postcode;
+  final String? postcode;
 
   /// This can be null
-  final String sortingCode;
+  final String? sortingCode;
 
   /// This can be null
-  final String recipient;
+  final String? recipient;
 
   /// This can be null
-  final String country;
+  final String? country;
 
   /// This can be null
-  final String phone;
+  final String? phone;
 
   /// This can be null
-  final String organization;
+  final String? organization;
 
   /// This can be null
-  final String dependentLocality;
+  final String? dependentLocality;
 
   Address(
       {this.type,

@@ -1,3 +1,11 @@
+# 4.3.0
+- Make Nullsafety the default
+- Fix `java.lang.NullPointerException when calling pickFullContact()` (#22)
+
+# 4.3.0-nullsafety.5
+
+- First null safety release for 4.x
+
 # 4.2.1
 
 ### Web fixes

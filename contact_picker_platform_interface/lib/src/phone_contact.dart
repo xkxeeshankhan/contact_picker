@@ -3,14 +3,14 @@ import 'phone_number.dart';
 
 ///Phone Contact
 class PhoneContact extends Contact {
-  const PhoneContact(String fullName, this.phoneNumber) : super(fullName);
+  const PhoneContact(String? fullName, this.phoneNumber) : super(fullName);
 
   factory PhoneContact.fromMap(Map<dynamic, dynamic> map) =>
       PhoneContact(map['fullName'], PhoneNumber.fromMap(map['phoneNumber']));
 
   /// Phone number of the contact
   /// This can be null on Flutter Web in case the user unselects the phone number in the contact picker interface
-  final PhoneNumber phoneNumber;
+  final PhoneNumber? phoneNumber;
 
   @override
   String toString() {

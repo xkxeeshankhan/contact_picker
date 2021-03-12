@@ -1,13 +1,13 @@
 import 'labeled.dart';
 
 class EmailAddress extends Labeled {
-  const EmailAddress(this.email, String label) : super(label);
+  const EmailAddress(this.email, String? label) : super(label);
 
   factory EmailAddress.fromMap(Map<dynamic, dynamic> map) =>
       EmailAddress(map['email'], map['label']);
 
   /// The email address
-  final String email;
+  final String? email;
 
   @override
   String toString() {

@@ -3,7 +3,7 @@ abstract class Labeled {
 
   /// Label of the labeled item
   /// Can be null if item can be labeled but has no label
-  final String label;
+  final String? label;
 
   @override
   String toString() {
