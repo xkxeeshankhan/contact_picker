@@ -30,7 +30,7 @@ dev_dependencies:
 
   fluttercontactpicker:
     path: ../
-  url_launcher: ^5.7.10
+  url_launcher: ^6.0.2
 
 analyzer:
   enable-experiment:

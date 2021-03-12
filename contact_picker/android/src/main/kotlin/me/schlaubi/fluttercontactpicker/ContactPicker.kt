@@ -107,11 +107,11 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         return mapOf("name" to name, "instantMessengers" to instantMessengers, "phones" to phones, "addresses" to addresses, "emails" to emails, "photo" to photo, "note" to note, "company" to company, "sip" to sip, "relations" to relations, "custom_fields" to customFields)
     }
 
-    private fun getCompany(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Organization.COMPANY))
+    private fun getCompany(it: Cursor): String? = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Organization.COMPANY))
 
-    private fun getNote(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
+    private fun getNote(it: Cursor): String? = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.Note.NOTE))
 
-    private fun getSip(it: Cursor): String = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS))
+    private fun getSip(it: Cursor): String? = it.getString(it.getColumnIndex(ContactsContract.CommonDataKinds.SipAddress.SIP_ADDRESS))
 
     private fun buildPhoto(contentResolver: ContentResolver, data: Uri): ByteArray? {
         val photoStream = ContactsContract.Contacts.openContactPhotoInputStream(contentResolver, data)

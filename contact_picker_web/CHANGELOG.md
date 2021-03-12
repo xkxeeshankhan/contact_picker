@@ -1,3 +1,6 @@
+# 4.3.0
+- Make Nullsafety the default
+
 # 4.3.0-nullsafety.4
 
 - Update some more constraints because the dart analyzer wants to make your life harder

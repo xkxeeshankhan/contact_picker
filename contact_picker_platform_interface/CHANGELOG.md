@@ -1,3 +1,6 @@
+# 4.3.0
+- Make Nullsafety the default
+
 # 4.3.0-nullsafety.2
 
 - Update pubspec.lock
