@@ -1,3 +1,6 @@
+# 4.3.1
+- Fix SDK constraints
+
 # 4.3.0
 - Make Nullsafety the default
 
