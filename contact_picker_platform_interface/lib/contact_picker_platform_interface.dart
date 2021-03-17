@@ -14,3 +14,4 @@ export 'src/labeled.dart';
 export 'src/phone_contact.dart';
 export 'src/phone_number.dart';
 export 'src/platform.dart';
+export 'src/exceptions.dart';

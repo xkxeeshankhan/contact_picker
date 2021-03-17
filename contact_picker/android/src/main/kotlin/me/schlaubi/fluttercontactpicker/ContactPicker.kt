@@ -14,11 +14,12 @@ import android.provider.ContactsContract
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.PluginRegistry
 import java.io.ByteArrayOutputStream
+import java.util.*
 
 class ContactPicker private constructor(private val pickContext: PickContext, private val result: MethodChannel.Result, askForPermission: Boolean, private val requestCode: Int, private val type: Uri) : PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
     init {
-        val hasPermission = PermissionUtil.hasPermission(pickContext.context) || ("xiaomi" !in Build.MANUFACTURER.toLowerCase() /* Cool android OEMs think it's cool to not do what Android does */ && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && requestCode != FlutterContactPickerPlugin.PICK_CONTACT) // below android 11 there is no need for permissions when only requesting email/phone number
+        val hasPermission = PermissionUtil.hasPermission(pickContext.context) || ("xiaomi" !in Build.MANUFACTURER.toLowerCase(Locale.getDefault()) /* Cool android OEMs think it's cool to not do what Android does */ && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && requestCode != FlutterContactPickerPlugin.PICK_CONTACT) // below android 11 there is no need for permissions when only requesting email/phone number
         if (!hasPermission && askForPermission) {
             PermissionUtil.requestPermission(pickContext.activity, this)
         } else if (hasPermission) {
@@ -35,11 +36,6 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
-        if (data == null) {
-            pickContext.removeActivityResultListener(this)
-            return false
-        }
-
         try {
             when (requestCode) {
                 FlutterContactPickerPlugin.PICK_EMAIL -> processDisplayNamed(data, "email", ::buildEmailAddress)
@@ -55,23 +51,34 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         return true
     }
 
-    private fun processDisplayNamed(intent: Intent, dataName: String, dataProcessor: (Cursor, Activity, Uri) -> Map<String, String>) {
+    private fun processInput(intent: Intent?, block: (Uri) -> Unit) {
+        val data = intent?.data
+        if (data == null) {
+            pickContext.removeActivityResultListener(this)
+            result.error("CANCELLED", "The user cancelled the process without picking a contact", null)
+            return
+        }
+        block(data)
+    }
+
+    private fun processDisplayNamed(intent: Intent?, dataName: String, dataProcessor: (Cursor, Activity, Uri) -> Map<String, String>) {
         val processor = { cursor: Cursor, activity: Activity, uri: Uri ->
             buildDisplayNamed(cursor, dataName, dataProcessor(cursor, activity, uri))
         }
         return processContact(intent, processor)
     }
 
-    private fun processContact(intent: Intent, dataProcessor: (Cursor, Activity, Uri) -> Map<String, Any?>) {
-        val data = intent.data ?: return
-        val activity = pickContext.activity
-        activity.contentResolver.query(data, null, null, null, null).use {
-            require(it != null) { "Cursor must not be null" }
-            it.moveToFirst()
-            val processedData = dataProcessor(it, activity, data)
-            this.result.success(processedData)
+    private fun processContact(intent: Intent?, dataProcessor: (Cursor, Activity, Uri) -> Map<String, Any?>) {
+        processInput(intent) { data ->
+            val activity = pickContext.activity
+            activity.contentResolver.query(data, null, null, null, null).use {
+                require(it != null) { "Cursor must not be null" }
+                it.moveToFirst()
+                val processedData = dataProcessor(it, activity, data)
+                this.result.success(processedData)
+            }
+            pickContext.removeActivityResultListener(this)
         }
-        pickContext.removeActivityResultListener(this)
     }
 
     private fun buildContact(cursor: Cursor, activity: Activity, data: Uri): Map<String, Any?> {

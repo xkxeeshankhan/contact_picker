@@ -29,10 +29,10 @@ class MainWidget extends StatefulWidget {
 }
 
 class _MainWidgetState extends State<MainWidget> {
-  PhoneContact _phoneContact;
-  EmailContact _emailContact;
-  String _contact;
-  Image _contactPhoto;
+  PhoneContact? _phoneContact;
+  EmailContact? _emailContact;
+  String? _contact;
+  Image? _contactPhoto;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -62,14 +62,15 @@ class _MainWidgetState extends State<MainWidget> {
                   ..onTap = () => launch('https://web.dev/contact-picker/')),
             TextSpan(text: ' and '),
             TextSpan(
-                text: 'https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API#Browser_compatibility/',
+                text:
+                    'https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API#Browser_compatibility/',
                 style: TextStyle(
                   color: Colors.blue,
                   decoration: TextDecoration.underline,
                 ),
                 recognizer: TapGestureRecognizer()
-                  ..onTap = () => launch('https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API#Browser_compatibility'))
-
+                  ..onTap = () => launch(
+                      'https://developer.mozilla.org/en-US/docs/Web/API/Contact_Picker_API#Browser_compatibility'))
           ]),
     );
   }
@@ -80,23 +81,23 @@ class _MainWidgetState extends State<MainWidget> {
         Column(
           children: <Widget>[
             const Text("Email contact:"),
-            Text("Name: ${_emailContact.fullName}"),
+            Text("Name: ${_emailContact!.fullName}"),
             Text(
-                "Email: ${_emailContact.email.email} (${_emailContact.email.label})")
+                "Email: ${_emailContact!.email!.email} (${_emailContact!.email!.label})")
           ],
         ),
       if (_phoneContact != null)
         Column(
           children: <Widget>[
             const Text("Phone contact:"),
-            Text("Name: ${_phoneContact.fullName}"),
+            Text("Name: ${_phoneContact!.fullName}"),
             Text(
-                "Phone: ${_phoneContact.phoneNumber.number} (${_phoneContact.phoneNumber.label})")
+                "Phone: ${_phoneContact!.phoneNumber!.number} (${_phoneContact!.phoneNumber!.label})")
           ],
         ),
-      if (_contactPhoto != null) _contactPhoto,
-      if (_contact != null) Text(_contact),
-      RaisedButton(
+      if (_contactPhoto != null) _contactPhoto!,
+      if (_contact != null) Text(_contact!),
+      ElevatedButton(
         child: const Text("pick phone contact"),
         onPressed: () async {
           final PhoneContact contact =
@@ -107,7 +108,7 @@ class _MainWidgetState extends State<MainWidget> {
           });
         },
       ),
-      RaisedButton(
+      ElevatedButton(
         child: const Text("pick email contact"),
         onPressed: () async {
           final EmailContact contact =
@@ -118,7 +119,7 @@ class _MainWidgetState extends State<MainWidget> {
           });
         },
       ),
-      RaisedButton(
+      ElevatedButton(
         child: const Text("pick full contact"),
         onPressed: () async {
           final FullContact contact =
@@ -129,7 +130,7 @@ class _MainWidgetState extends State<MainWidget> {
           });
         },
       ),
-      RaisedButton(
+      ElevatedButton(
         child: const Text('Check permission'),
         onPressed: () async {
           final granted = await FlutterContactPicker.hasPermission();
@@ -139,7 +140,7 @@ class _MainWidgetState extends State<MainWidget> {
                   title: const Text('Granted: '), content: Text('$granted')));
         },
       ),
-      RaisedButton(
+      ElevatedButton(
         child: const Text('Request permission'),
         onPressed: () async {
           final granted = await FlutterContactPicker.requestPermission();

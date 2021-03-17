@@ -1,3 +1,9 @@
+# 4.4.0
+- Update to new interface
+
+# 4.3.3
+- Update to new interface
+
 # 4.3.1
 - Fix SDK constraints
 

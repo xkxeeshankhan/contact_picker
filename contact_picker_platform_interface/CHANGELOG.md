@@ -1,3 +1,12 @@
+# 4.4.0
+- Fix pickEmailContact never completes if pressing BACK on Android bug (#29)
+
+# 4.3.3
+- Fix pickEmailContact never completes if pressing BACK on Android bug (#29)
+
+# 4.3.2
+- Add UserCancelledPickingException to interface
+
 # 4.3.1
 - Fix SDK constraints
 

@@ -3,67 +3,67 @@
   "packages": [
     {
       "name": "characters",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0-nullsafety.5",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/characters-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "collection",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0-nullsafety.5",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/collection-1.15.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "contact_picker_platform_interface",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/contact_picker_platform_interface-4.3.0-nullsafety.2",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/contact_picker_platform_interface-4.3.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter",
-      "rootUri": "file:///C:/flutter/packages/flutter",
+      "rootUri": "file:///E:/flutter/packages/flutter",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///C:/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///E:/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "js",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3-nullsafety.3",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "meta",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.3.0-nullsafety.6",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "plugin_platform_interface",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-1.1.0-nullsafety.1",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///C:/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///E:/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0-nullsafety.5",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/typed_data-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "vector_math",
-      "rootUri": "file:///C:/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.0-nullsafety.5",
+      "rootUri": "file:///E:/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -74,7 +74,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2020-12-09T21:34:40.036511Z",
+  "generated": "2021-03-17T10:44:15.975076Z",
   "generator": "pub",
-  "generatorVersion": "2.12.0-121.0.dev"
+  "generatorVersion": "2.12.1"
 }
