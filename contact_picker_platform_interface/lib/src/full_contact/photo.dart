@@ -9,7 +9,7 @@ class Photo {
   Photo(this._bytes);
 
   factory Photo.fromMap(Map<dynamic, dynamic> map) =>
-      Photo(map['photo'] as Uint8List);
+      Photo((map['photo'] ?? Uint8List(0)) as Uint8List);
 
   /// Returns the Image as an [ImageProvider]
   /// See [Image]
