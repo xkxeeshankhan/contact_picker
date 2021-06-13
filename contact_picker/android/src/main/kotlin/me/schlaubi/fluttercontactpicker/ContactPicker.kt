@@ -52,7 +52,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
     }
 
     private fun processInput(intent: Intent?, block: (Uri) -> Unit) {
-        val data = intent.data
+        val data = intent?.data
         if (data == null) {
             pickContext.removeActivityResultListener(this)
             result.error("CANCELLED", "The user cancelled the process without picking a contact", null)
