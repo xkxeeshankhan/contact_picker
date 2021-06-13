@@ -71,7 +71,7 @@ class FullContact {
           .cast<Address>()
           .toList(growable: false),
       StructuredName.fromMap(map["name"]),
-      Photo.fromMap(map),
+      map['photo'] == null ? null : Photo.fromMap(map),
       map['note'],
       map['company'],
       map['sip'],
