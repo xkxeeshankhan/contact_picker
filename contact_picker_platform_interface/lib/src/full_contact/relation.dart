@@ -25,6 +25,7 @@ class Relation {
 }
 
 enum RelationType {
+  custom,
   assistant,
   brother,
   child,
@@ -72,6 +73,6 @@ RelationType _typeByName(String? name) {
     case 'spouse':
       return RelationType.spouse;
     default:
-      throw ArgumentError('Invalid name: $name');
+      return RelationType.custom;
   }
 }

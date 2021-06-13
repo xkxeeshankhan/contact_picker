@@ -52,7 +52,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
     }
 
     private fun processInput(intent: Intent?, block: (Uri) -> Unit) {
-        val data = intent?.data
+        val data = intent.data
         if (data == null) {
             pickContext.removeActivityResultListener(this)
             result.error("CANCELLED", "The user cancelled the process without picking a contact", null)
@@ -157,6 +157,7 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
     private fun buildRelation(cursor: Cursor): Map<String, String> {
         val name = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.NAME))
         val type = when (val typeInt = cursor.getInt(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.TYPE))) {
+            ContactsContract.CommonDataKinds.Relation.TYPE_CUSTOM -> cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Relation.LABEL))
             ContactsContract.CommonDataKinds.Relation.TYPE_ASSISTANT -> "assistant"
             ContactsContract.CommonDataKinds.Relation.TYPE_BROTHER -> "brother"
             ContactsContract.CommonDataKinds.Relation.TYPE_CHILD -> "child"
