@@ -1,3 +1,6 @@
+# 4.5.0
+- Update to new interface
+
 # 4.4.0
 - Update to new interface
 

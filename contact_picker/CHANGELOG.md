@@ -1,3 +1,11 @@
+# 4.5.0
+- Update to Kotlin 1.5.10
+- Update to Gradle 7
+- Update Android Gradle plugin
+- Fix NPEs when certain values in contacts are null on Android (Fix #35)
+- fix when map['photo'] is null (#31 by @daniloadorno)
+- Support Custom Relations [Android] (#34 by alkebuware)
+
 # 4.4.0
 - Fix pickEmailContact never completes if pressing BACK on Android bug (#29)
 

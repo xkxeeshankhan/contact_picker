@@ -41,7 +41,7 @@ class FlutterContactPickerPlugin : AbstractFlutterContactPickerPlugin(), Flutter
 
     companion object {
         @JvmStatic
-        @Suppress("unused") // Backwards compatibility for v1 plugins
+        @Suppress("unused", "deprecation") // Backwards compatibility for v1 plugins
         fun registerWith(registrar: PluginRegistry.Registrar) = LegacyFlutterContactPickerPlugin(registrar)
 
         const val PICK_PHONE = 2015

@@ -19,7 +19,9 @@ import java.util.*
 class ContactPicker private constructor(private val pickContext: PickContext, private val result: MethodChannel.Result, askForPermission: Boolean, private val requestCode: Int, private val type: Uri) : PluginRegistry.ActivityResultListener, PluginRegistry.RequestPermissionsResultListener {
 
     init {
-        val hasPermission = PermissionUtil.hasPermission(pickContext.context) || ("xiaomi" !in Build.MANUFACTURER.toLowerCase(Locale.getDefault()) /* Cool android OEMs think it's cool to not do what Android does */ && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && requestCode != FlutterContactPickerPlugin.PICK_CONTACT) // below android 11 there is no need for permissions when only requesting email/phone number
+        val hasPermission = PermissionUtil.hasPermission(pickContext.context) || ("xiaomi" !in Build.MANUFACTURER.lowercase(
+            Locale.getDefault()
+        ) /* Cool android OEMs think it's cool to not do what Android does */ && Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q && requestCode != FlutterContactPickerPlugin.PICK_CONTACT) // below android 11 there is no need for permissions when only requesting email/phone number
         if (!hasPermission && askForPermission) {
             PermissionUtil.requestPermission(pickContext.activity, this)
         } else if (hasPermission) {
@@ -61,14 +63,14 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         block(data)
     }
 
-    private fun processDisplayNamed(intent: Intent?, dataName: String, dataProcessor: (Cursor, Activity, Uri) -> Map<String, String>) {
+    private fun processDisplayNamed(intent: Intent?, dataName: String, dataProcessor: (Cursor, Activity, Uri) -> Map<String, String>?) {
         val processor = { cursor: Cursor, activity: Activity, uri: Uri ->
             buildDisplayNamed(cursor, dataName, dataProcessor(cursor, activity, uri))
         }
         return processContact(intent, processor)
     }
 
-    private fun processContact(intent: Intent?, dataProcessor: (Cursor, Activity, Uri) -> Map<String, Any?>) {
+    private fun processContact(intent: Intent?, dataProcessor: (Cursor, Activity, Uri) -> Map<String, Any?>?) {
         processInput(intent) { data ->
             val activity = pickContext.activity
             activity.contentResolver.query(data, null, null, null, null).use {
@@ -99,9 +101,9 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
             do {
                 when (it.getString(it.getColumnIndex(ContactsContract.RawContactsEntity.MIMETYPE))) {
                     ContactsContract.CommonDataKinds.Im.CONTENT_ITEM_TYPE -> instantMessengers += buildInstantMessenger(it, activity)
-                    ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE -> emails += buildEmailAddress(it, activity, data)
+                    ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE -> emails.addNotNull(buildEmailAddress(it, activity, data))
                     ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE -> addresses += buildAddress(it, activity)
-                    ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> phones += buildPhoneNumber(it, activity, data)
+                    ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE -> phones.addNotNull(buildPhoneNumber(it, activity, data))
                     ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE -> name = buildName(it)
                     ContactsContract.CommonDataKinds.Note.CONTENT_ITEM_TYPE -> note = getNote(it)
                     ContactsContract.CommonDataKinds.Organization.CONTENT_ITEM_TYPE -> company = getCompany(it)
@@ -211,18 +213,21 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         return mapOf("firstName" to firstName, "middleName" to middleName, "nickname" to nickname, "lastName" to lastName)
     }
 
-    private fun buildDisplayNamed(cursor: Cursor, dataName: String, data: Map<String, String>): Map<String, Any> {
-        val fullName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Identity.DISPLAY_NAME))
+    private fun buildDisplayNamed(cursor: Cursor, dataName: String, data: Map<String, String>?): Map<String, Any>? {
+        if (data == null) {
+            return null
+        }
+        val fullName = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Identity.DISPLAY_NAME)) ?: return null
         return mapOf("fullName" to fullName, dataName to data)
     }
 
-    private fun buildPhoneNumber(cursor: Cursor, activity: Activity, @Suppress("UNUSED_PARAMETER") data: Uri): Map<String, String> {
-        val number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+    private fun buildPhoneNumber(cursor: Cursor, activity: Activity, @Suppress("UNUSED_PARAMETER") data: Uri): Map<String, String>? {
+        val number = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)) ?: return null
         return buildLabeledItem(cursor, activity, ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.LABEL, "phoneNumber", number)
     }
 
-    private fun buildEmailAddress(cursor: Cursor, activity: Activity, @Suppress("UNUSED_PARAMETER") data: Uri): Map<String, String> {
-        val address = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA))
+    private fun buildEmailAddress(cursor: Cursor, activity: Activity, @Suppress("UNUSED_PARAMETER") data: Uri): Map<String, String>? {
+        val address = cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Email.DATA)) ?: return null
         return buildLabeledItem(cursor, activity, ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.LABEL, "email", address)
     }
 
@@ -256,5 +261,11 @@ class ContactPicker private constructor(private val pickContext: PickContext, pr
         fun requestPicker(requestCode: Int, type: Uri, result: MethodChannel.Result, context: PickContext, askForPermission: Boolean) =
                 ContactPicker(context, result, askForPermission, requestCode, type)
 
+    }
+}
+
+private fun <T> MutableList<T>.addNotNull(nullable: T?) {
+    if (nullable != null) {
+        add(nullable)
     }
 }

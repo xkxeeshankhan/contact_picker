@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import io.flutter.plugin.common.PluginRegistry
 
+@Suppress("DEPRECATION") // This is legacy support
 class LegacyFlutterContactPickerPlugin(private val registrar: PluginRegistry.Registrar) : AbstractFlutterContactPickerPlugin() {
 
     override val context: PickContext = V1Context()

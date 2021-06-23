@@ -7,9 +7,9 @@ abstract class AbstractPickContext : PickContext {
 
     private val listeners = mutableListOf<PluginRegistry.ActivityResultListener>()
 
-    override fun removeActivityResultListener(listener: PluginRegistry.ActivityResultListener) = listeners.remove(listener).run { Unit }
+    override fun removeActivityResultListener(listener: PluginRegistry.ActivityResultListener) = listeners.remove(listener).run { }
 
-    override fun addActivityResultListener(listener: PluginRegistry.ActivityResultListener) = listeners.add(listener).run { Unit }
+    override fun addActivityResultListener(listener: PluginRegistry.ActivityResultListener) = listeners.add(listener).run { }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?): Boolean {
         return listeners.any { it.onActivityResult(requestCode, resultCode, data) }
