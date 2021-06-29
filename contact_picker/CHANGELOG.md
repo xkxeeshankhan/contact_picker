@@ -1,3 +1,7 @@
+# 4.5.1
+- Bump platform to 4.5.1
+- Bump Kotlin to 1.5.20
+
 # 4.5.0
 - Update to Kotlin 1.5.10
 - Update to Gradle 7

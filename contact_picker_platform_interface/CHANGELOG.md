@@ -1,3 +1,6 @@
+# 4.5.1
+- Fix unsupported meta version
+
 # 4.5.0
 - Bump dependencies
 

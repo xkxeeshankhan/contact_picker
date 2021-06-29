@@ -1,3 +1,6 @@
+# 4.5.1
+- Bump platform to 4.5.1
+
 # 4.5.0
 - Update to new interface
 
