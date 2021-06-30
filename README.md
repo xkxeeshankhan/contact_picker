@@ -3,7 +3,7 @@
 
 Interact with native OS contact pickers using Flutter
 
-**Note:** This plugin requires at least Kotlin 1.4.0 to compile
+**Note:** This plugin requires at least Kotlin 1.5.0 to compile. See ([#38 (comment)](https://github.com/DRSchlaubi/contact_picker/issues/38#issuecomment-871212051) for more information)
 
 Web demo: https://fcp.mik.wtf/
 
