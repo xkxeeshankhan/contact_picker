@@ -9,19 +9,28 @@ const MethodChannel _channel = const MethodChannel('me.schlaubi.contactpicker');
 
 class MethodChannelContactPicker extends ContactPickerPlatform {
   @override
-  Future<PhoneContact> pickPhoneContact({bool askForPermission = true}) async =>
-      PhoneContact.fromMap((await _channel.invokeMethod<Map<dynamic, dynamic>>(
-          'pickPhoneContact', {'askForPermission': askForPermission})));
+  Future<PhoneContact> pickPhoneContact({bool askForPermission = true}) async {
+    final contact = await _channel.invokeMethod<Map<dynamic, dynamic>>(
+        'pickPhoneContact', {'askForPermission': askForPermission});
+    if (contact != null) PhoneContact.fromMap(contact);
+    return null;
+  }
 
   @override
-  Future<EmailContact> pickEmailContact({bool askForPermission = true}) async =>
-      EmailContact.fromMap((await _channel.invokeMethod<Map<dynamic, dynamic>>(
-          'pickEmailContact', {'askForPermission': askForPermission})));
+  Future<EmailContact> pickEmailContact({bool askForPermission = true}) async {
+    final contact = (await _channel.invokeMethod<Map<dynamic, dynamic>>(
+        'pickEmailContact', {'askForPermission': askForPermission}));
+    if (contact != null) EmailContact.fromMap(contact);
+    return null;
+  }
 
   @override
-  Future<FullContact> pickFullContact({bool askForPermission = true}) async =>
-      FullContact.fromMap((await _channel.invokeMethod<Map<dynamic, dynamic>>(
-          'pickContact', {'askForPermission': askForPermission})));
+  Future<FullContact> pickFullContact({bool askForPermission = true}) async {
+    final contact = (await _channel.invokeMethod<Map<dynamic, dynamic>>(
+        'pickContact', {'askForPermission': askForPermission}));
+    if (contact != null) FullContact.fromMap(contact);
+    return null;
+  }
 
   @override
   Future<bool> hasPermission() async =>
