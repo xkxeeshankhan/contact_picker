@@ -16,7 +16,11 @@ dependencies:
       url: git://github.com/xkxeeshankhan/contact_picker.git
       ref: xk/4.2.1-ios-back-fix
       path: contact_picker_platform_interface/
-  contact_picker_web: ^4.2.1
+  contact_picker_web: 
+    git:
+      url: git://github.com/xkxeeshankhan/contact_picker.git
+      ref: xk/4.2.1-ios-back-fix
+      path: contact_picker_web/
 
 dev_dependencies:
   flutter_test:
