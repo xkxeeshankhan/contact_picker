@@ -12,7 +12,7 @@ class MethodChannelContactPicker extends ContactPickerPlatform {
   Future<PhoneContact> pickPhoneContact({bool askForPermission = true}) async {
     final contact = await _channel.invokeMethod<Map<dynamic, dynamic>>(
         'pickPhoneContact', {'askForPermission': askForPermission});
-    if (contact != null) PhoneContact.fromMap(contact);
+    if (contact != null) return PhoneContact.fromMap(contact);
     return null;
   }
 
@@ -20,7 +20,7 @@ class MethodChannelContactPicker extends ContactPickerPlatform {
   Future<EmailContact> pickEmailContact({bool askForPermission = true}) async {
     final contact = (await _channel.invokeMethod<Map<dynamic, dynamic>>(
         'pickEmailContact', {'askForPermission': askForPermission}));
-    if (contact != null) EmailContact.fromMap(contact);
+    if (contact != null) return EmailContact.fromMap(contact);
     return null;
   }
 
@@ -28,7 +28,7 @@ class MethodChannelContactPicker extends ContactPickerPlatform {
   Future<FullContact> pickFullContact({bool askForPermission = true}) async {
     final contact = (await _channel.invokeMethod<Map<dynamic, dynamic>>(
         'pickContact', {'askForPermission': askForPermission}));
-    if (contact != null) FullContact.fromMap(contact);
+    if (contact != null) return FullContact.fromMap(contact);
     return null;
   }
 
